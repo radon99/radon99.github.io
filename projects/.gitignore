@@ -1,0 +1,40 @@
+# 운영체제 및 임시 파일
+.DS_Store
+Thumbs.db
+~$*
+.~lock.*
+
+# 테스트 및 로그 파일
+*.log
+*_backup.py
+
+# 빌드 결과물
+Debug/
+
+# IDE 환경 설정 파일
+*.launch
+*.project
+*.cproject
+*.cproj
+.settings/
+.vscode/
+*.uvprojx
+*.uvoptx
+
+# 캐시 및 임시 파일
+*.log
+*.tmp
+*.bak
+
+# macOS 숨김 파일
+._*
+
+# Windows 숨김 파일
+desktop.ini
+
+# 민감한 정보 파일
+*.key
+*.crt
+*.pem
+
+*.pptx

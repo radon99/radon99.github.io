@@ -1,0 +1,12 @@
+# 운영체제 및 임시 파일
+.DS_Store
+Thumbs.db
+~$*
+.~lock.*
+
+# 테스트 및 로그 파일
+*.log
+*_backup.py
+
+# 기타
+*.tmp
