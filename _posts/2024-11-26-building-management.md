@@ -5,6 +5,7 @@ title: "IoT BMS 프로젝트"
 date: 2024-11-26
 author: jsh
 prevPart: _posts/2024-10-23-smart-library.md
+nextPart: _posts/2024-11-26-building-management.md
 ---
 
 # IoT BMS 프로젝트
