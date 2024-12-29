@@ -1,0 +1,234 @@
+I"�<h1 id="digital-fan-프로젝트"><strong>Digital Fan 프로젝트</strong></h1>
+<div style="text-align: center;">
+<a href="/assets/img/posts/DigitalFan_main.jpg" data-lity="">
+  <img src="/assets/img/posts/DigitalFan_main.jpg" style="width: auto; max-height: 500px;" />
+</a>
+</div>
+
+<h2 id="개요">개요</h2>
+
+<h3 id="프로젝트-기간">프로젝트 기간</h3>
+<ul>
+  <li>2024.07.23 ~ 2024.08.09</li>
+</ul>
+
+<h3 id="목적">목적</h3>
+<p>ATmega128 마이크로컨트롤러를 기반으로 설계된 선풍기 제어 시스템으로, 다음과 같은 기능을 포함합니다:</p>
+
+<ul>
+  <li>자동/수동 모드 전환 및 풍속 제어</li>
+  <li>타이머 설정 기능</li>
+  <li>부저를 활용한 음악 재생</li>
+</ul>
+
+<hr />
+
+<h2 id="주요-기능">주요 기능</h2>
+
+<ol>
+  <li><strong>자동 모드</strong>: 자연풍을 구현하여 선풍기 속도 자동 조절</li>
+  <li><strong>수동 모드</strong>: 사용자가 직접 풍속(저속, 중속, 고속) 및 타이머 설정</li>
+  <li><strong>디스플레이 출력</strong>:
+    <ul>
+      <li>16x2 LCD를 통해 현재 모드와 상태 표시</li>
+      <li>7-세그먼트 디스플레이(FND)를 통해 남은 시간 표시</li>
+    </ul>
+  </li>
+  <li><strong>UART 제어</strong>: 직렬 통신을 통한 외부 명령 수신 및 제어</li>
+  <li><strong>부저 음악 재생</strong>: 바람 세기에 따른 음악 속도 조절 및 재생</li>
+</ol>
+
+<hr />
+
+<h2 id="하드웨어-사양">하드웨어 사양</h2>
+
+<h3 id="구성-요소">구성 요소</h3>
+<ul>
+  <li><strong>MCU</strong>: ATmega128 (16MHz 클럭)</li>
+  <li><strong>입력 장치</strong>: 버튼, UART</li>
+  <li><strong>출력 장치</strong>:
+    <ul>
+      <li>16x2 LCD</li>
+      <li>7-세그먼트 디스플레이(FND)</li>
+      <li>DC 모터</li>
+      <li>부저</li>
+    </ul>
+  </li>
+  <li><strong>제어 방식</strong>: PWM을 활용한 선풍기 속도 제어</li>
+</ul>
+
+<h3 id="연결-다이어그램">연결 다이어그램</h3>
+<ul>
+  <li><strong>버튼</strong>: GPIO 핀 연결, Pull-up 방식</li>
+  <li><strong>LCD</strong>: 데이터 핀 8개 및 제어 핀 3개로 병렬 연결</li>
+  <li><strong>FND</strong>: 공통 캐소드 방식, 병렬 연결</li>
+  <li><strong>UART</strong>: TX, RX 핀을 통해 직렬 USB 터미널 연결</li>
+</ul>
+
+<hr />
+
+<h2 id="소프트웨어-구조">소프트웨어 구조</h2>
+
+<h3 id="계층형-아키텍처">계층형 아키텍처</h3>
+<div style="text-align: center;">
+<a href="/assets/img/posts/sw_stack.jpg" data-lity="">
+  <img src="/assets/img/posts/sw_stack.jpg" style="width: auto; max-height: 500px;" />
+</a>
+</div>
+
+<ol>
+  <li><strong>Application Layer</strong>:
+    <ul>
+      <li>메인 로직, 입력 처리, 데이터 관리, 디스플레이 갱신</li>
+    </ul>
+  </li>
+  <li><strong>Driver Layer</strong>:
+    <ul>
+      <li>하드웨어 장치(Button, LCD, FND, Buzzer)의 추상화된 인터페이스 제공</li>
+    </ul>
+  </li>
+  <li><strong>Peripheral Layer</strong>:
+    <ul>
+      <li>GPIO, 타이머, UART 등의 저수준 하드웨어 제어</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="주요-소프트웨어-기능">주요 소프트웨어 기능</h3>
+<div style="text-align: center;">
+<a href="/assets/img/posts/fsm.jpg" data-lity="">
+  <img src="/assets/img/posts/fsm.jpg" style="width: auto; max-height: 500px;" />
+</a>
+</div>
+
+<ol>
+  <li><strong>시스템 초기화</strong>
+    <ul>
+      <li>GPIO, 타이머, LCD, FND, UART, 부저 초기화</li>
+    </ul>
+  </li>
+  <li><strong>입력 처리</strong>
+    <ul>
+      <li>버튼 : GPIO 핀에 연결하여 디바운싱 입력 처리, 눌림/떼어짐 구현</li>
+      <li>UART : 명령을 통해 모드 전환 및 설정 변경</li>
+    </ul>
+  </li>
+  <li><strong>모드 전환</strong>
+    <ul>
+      <li>자동 모드: 66~100% 범위의 랜덤한 Duty Cycle로 자연풍 구현</li>
+      <li>수동 모드: 사용자가 직접 풍속 조절 및 타이머 설정</li>
+    </ul>
+  </li>
+  <li><strong>디스플레이 갱신</strong>
+    <ul>
+      <li>LCD에 현재 상태 출력, 타이머 구동시 제품명 바운스 기능(1초마다 1칸씩 이동), 타이머 구동하지 않을 때는 제품명 가운데 정렬</li>
+      <li>FND에 남은 시간 또는 풍속 표시</li>
+    </ul>
+  </li>
+  <li><strong>PWM 기반 속도 제어</strong>
+    <ul>
+      <li>Prescaler 1/64 설정</li>
+      <li>FAST PWM 모드, 비반전 모드</li>
+    </ul>
+  </li>
+  <li><strong>부저 음악 재생</strong>
+    <ul>
+      <li>주파수를 조합하여 음악 배열 구성</li>
+      <li>바람 세기에 따라 음 유지 시간 조정</li>
+      <li>음 사이에 300ms 간격 유지</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="빌드-및-실행">빌드 및 실행</h2>
+
+<h3 id="빌드-환경">빌드 환경</h3>
+<ul>
+  <li><strong>운영체제</strong>: Windows 10 x64</li>
+  <li><strong>프로그래밍 언어</strong>: C</li>
+  <li><strong>컴파일러</strong>: AVR GCC</li>
+  <li><strong>IDE</strong>: Microchip Studio</li>
+</ul>
+
+<h3 id="실행-방법">실행 방법</h3>
+<ol>
+  <li>프로젝트를 빌드하여 HEX 파일 생성</li>
+  <li>ATmega128에 업로드</li>
+  <li>보드 전원을 연결하여 실행</li>
+  <li>버튼으로 모드 및 설정 변경</li>
+</ol>
+
+<hr />
+
+<h2 id="lcd-출력화면-예시">LCD 출력화면 예시</h2>
+
+<ol>
+  <li>타이머 종료
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Digital Fan!
+  STOP  00:00
+</code></pre></div>    </div>
+  </li>
+  <li>타이머 작동
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Digital Fan!
+  LOW   02:57
+</code></pre></div>    </div>
+  </li>
+  <li>수동 모드
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Digital Fan!
+  LOW   00:00
+</code></pre></div>    </div>
+  </li>
+  <li>오토 모드
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Digital Fan!
+  AUTO  00:00
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="프로젝트-디렉토리-구조">프로젝트 디렉토리 구조</h2>
+<div style="text-align: center;">
+<a href="/assets/img/posts/sw_architecture.jpg" data-lity="">
+  <img src="/assets/img/posts/sw_architecture.jpg" style="width: auto; max-height: 500px;" />
+</a>
+</div>
+
+<div style="display: flex; justify-content: center; align-items: center; flex-direction: column; font-family: monospace;">
+  <pre style="text-align: left;">
+DigitalFan
+├── AP                  # 애플리케이션 계층
+│   ├── apMain.c       # 메인 로직
+│   ├── Listener       # 입력 처리
+│   ├── Model          # 데이터 관리
+│   ├── Presenter      # 디스플레이 관리
+│   └── Service        # 선풍기 제어
+├── driver              # 하드웨어 드라이버
+│   ├── Button         # 버튼 입력 처리
+│   ├── FND            # 7-세그먼트 디스플레이
+│   ├── LCD            # LCD 디스플레이
+│   └── Buzzer         # 부저 음악 재생
+├── periph              # 주변 장치
+│   ├── GPIO           # GPIO 제어
+│   ├── TIM            # 타이머 관리
+│   └── UART0          # UART 통신
+├── Debug               # 빌드된 실행 파일
+└── README.md           # 프로젝트 설명
+  </pre>
+</div>
+
+<hr />
+
+<h2 id="참고-자료">참고 자료</h2>
+<ul>
+  <li><a href="https://ww1.microchip.com/downloads/en/devicedoc/atmel-8151-8-bit-avr-atmega128_datasheet.pdf">ATmega128 데이터시트</a></li>
+</ul>
+
+<hr />
+
+<h2 id="github-저장소">GitHub 저장소</h2>
+<p><a href="https://github.com/radon99/radon99.github.io/tree/main/projects/DigitalFan">프로젝트 코드 보기</a></p>
+
+:ET
