@@ -1,2 +1,0 @@
-# AI_Team_1
-YOON TAE JOON 
