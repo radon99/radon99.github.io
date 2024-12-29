@@ -1,0 +1,301 @@
+<h1 id="iot-bms-프로젝트">IoT BMS 프로젝트</h1>
+<div style="text-align: center;">
+<a href="/assets/img/posts/bms_main.png" data-lity="">
+  <img src="/assets/img/posts/bms_main.png" style="width: auto; max-height: 500px;" />
+</a>
+</div>
+
+<h2 id="개요">개요</h2>
+
+<h3 id="프로젝트-기간">프로젝트 기간</h3>
+<ul>
+  <li>2024.11.22 ~ 2024.11.26</li>
+</ul>
+
+<h3 id="목적">목적</h3>
+<p>STM32, Arduino 그리고 라즈베리파이를 활용한 IoT 기반 빌딩 관리 시스템(BMS)을 구축하여, 다음과 같은 기능을 구현합니다:</p>
+
+<ul>
+  <li>층별 장치 제어 및 상태 모니터링</li>
+  <li>센서 데이터 수집 및 액츄에이터 제어</li>
+  <li>라즈베리파이를 통한 중앙 관리</li>
+  <li>SQL 클라이언트(MariaDB)를 통한 센서값 및 층별 상태 저장</li>
+  <li>소켓 통신으로 명령어 전송</li>
+</ul>
+
+<hr />
+
+<h2 id="주요-기능">주요 기능</h2>
+
+<h3 id="1-모니터링">1. 모니터링</h3>
+<ul>
+  <li><strong>DHT11 센서</strong>: 실내 온도 및 습도 데이터 측정</li>
+  <li><strong>CDS 센서</strong>: 조도(Light Level) 데이터 측정</li>
+</ul>
+
+<h3 id="2-액추에이터-제어">2. 액추에이터 제어</h3>
+<ul>
+  <li><strong>팬 (Fan)</strong>: ON/OFF 제어</li>
+  <li><strong>블라인드 (Blind)</strong>: UP/DOWN 제어</li>
+  <li><strong>램프 (Lamp)</strong>: ON/OFF 제어</li>
+  <li><strong>창문 (Window)</strong>: OPEN/CLOSE 제어</li>
+</ul>
+
+<h3 id="3-알람-기능">3. 알람 기능</h3>
+<ul>
+  <li>건물의 개방 시간과 폐쇄 시간을 설정하여 전체 층의 액추에이터를 자동으로 관리</li>
+</ul>
+
+<h3 id="4-앱-제어">4. 앱 제어</h3>
+<ul>
+  <li>안드로이드 기반 앱을 통해 전체 층의 액추에이터 조작</li>
+</ul>
+
+<hr />
+
+<h2 id="하드웨어-사양">하드웨어 사양</h2>
+
+<h3 id="구성-요소">구성 요소</h3>
+<ul>
+  <li><strong>보드</strong> STM32F4(클라이언트), Arduino Uno(클라이언트), RasPi(서버)</li>
+  <li><strong>센서</strong> DHT11 (온습도), CDS (조도)</li>
+  <li><strong>입출력 장치</strong>
+    <ul>
+      <li>버튼</li>
+      <li>I2C LCD (16x2) 디스플레이</li>
+      <li>서보 모터 (창문 제어)</li>
+      <li>스텝 모터 (블라인드 제어)</li>
+      <li>DC모터 및 LED</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="하드웨어-구조">하드웨어 구조</h3>
+<div style="text-align: center;">
+<a href="/assets/img/posts/bms3.png" data-lity="">
+  <img src="/assets/img/posts/bms3.png" style="width: auto; max-height: 300px;" />
+</a>
+</div>
+<div style="text-align: center;">
+<a href="/assets/img/posts/bms4.png" data-lity="">
+  <img src="/assets/img/posts/bms4.png" style="width: auto; max-height: 300px;" />
+</a>
+</div>
+
+<h3 id="연결-다이어그램">연결 다이어그램</h3>
+<ul>
+  <li><strong>STM32</strong>
+    <ul>
+      <li>GPIO로 LCD 및 버튼 연결</li>
+      <li>Bluetooth 모듈을 통해 통신</li>
+    </ul>
+  </li>
+  <li><strong>Arduino</strong>
+    <ul>
+      <li>센서 및 액추에이터와 연결</li>
+      <li>Wi-Fi 모듈을 통해 통신</li>
+    </ul>
+  </li>
+  <li><strong>Raspberry Pi</strong>:
+    <ul>
+      <li>MySQL 서버와 통신</li>
+      <li>클라이언트 중계 역할</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="소프트웨어-구조">소프트웨어 구조</h2>
+
+<h3 id="아키텍처">아키텍처</h3>
+
+<ol>
+  <li><strong>Application Layer</strong>
+    <ul>
+      <li>STM32와 Arduino의 주요 로직을 구현.</li>
+      <li>모드 전환, 명령 처리, 데이터 송신/수신.</li>
+    </ul>
+  </li>
+  <li><strong>Driver Layer</strong>
+    <ul>
+      <li>LCD, 버튼, 서보 모터 등 하드웨어 제어.</li>
+    </ul>
+  </li>
+  <li><strong>Database Integration</strong>
+    <ul>
+      <li>SQL 클라이언트와 MySQL 데이터베이스 연동.</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="명령어-전달-흐름">명령어 전달 흐름</h3>
+<p><strong>알람 모드 예시</strong></p>
+<div style="text-align: center;">
+<a href="/assets/img/posts/bms5.png" data-lity="">
+  <img src="/assets/img/posts/bms5.png" style="width: auto; max-height: 500px;" />
+</a>
+</div>
+
+<h3 id="주요-명령어-및-동작">주요 명령어 및 동작</h3>
+
+<h4 id="stm32-송신"><strong>STM32 송신</strong></h4>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>송신 명령어</strong></th>
+      <th><strong>설명</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[BMS_SQL]GET@FLOOR@DEVICE</code></td>
+      <td>특정 층의 장치 상태 요청.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[GETTIME]</code></td>
+      <td>현재 시간 요청.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[BMS_SQL]SET@FLOOR@DEVICE@STATE</code></td>
+      <td>특정 층 장치 상태 설정.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[BMS_SQL]OPEN</code> / <code class="language-plaintext highlighter-rouge">[BMS_SQL]CLOSE</code></td>
+      <td>모든 층 장치를 열림/닫힘 설정.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="stm32-수신"><strong>STM32 수신</strong></h4>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>수신 명령어</strong></th>
+      <th><strong>설명</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[BMS_SQL]ACTUATOR@FLOOR@DEVICE@STATE</code></td>
+      <td>장치 상태 응답.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[GETTIME]YYYY-MM-DD-HH-MM-SS</code></td>
+      <td>시간 동기화.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="arduino-송신"><strong>Arduino 송신</strong></h4>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>송신 명령어</strong></th>
+      <th><strong>설명</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[BMS_SQL]SENSOR@FLOOR@CDS@HUMI@TEMP</code></td>
+      <td>센서 데이터 송신.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="arduino-수신"><strong>Arduino 수신</strong></h4>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>수신 명령어</strong></th>
+      <th><strong>설명</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[BMS_%dF]SET@FLOOR@DEVICE@STATE</code></td>
+      <td>특정 층 장치 상태 설정.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="sql-client-송신"><strong>SQL Client 송신</strong></h4>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>송신 명령어</strong></th>
+      <th><strong>설명</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[BMS_SQL]ACTUATOR@FLOOR@DEVICE@STATE</code></td>
+      <td>장치 상태 응답.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[BMS_STM32]SENSOR@FLOOR@CDS@HUMI@TEMP</code></td>
+      <td>센서 데이터 송신.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[BMS_%dF]SET@FLOOR@DEVICE@STATE</code></td>
+      <td>특정 층 장치 상태 설정.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="sql-client-수신"><strong>SQL Client 수신</strong></h4>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>수신 명령어</strong></th>
+      <th><strong>설명</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[BMS_SQL]GET@FLOOR@DEVICE</code></td>
+      <td>장치 상태 요청.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[BMS_SQL]SET@FLOOR@DEVICE@STATE</code></td>
+      <td>특정 층 장치 상태 설정.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[BMS_SQL]OPEN</code> / <code class="language-plaintext highlighter-rouge">[BMS_SQL]CLOSE</code></td>
+      <td>모든 층 장치를 열림/닫힘 설정.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h3 id="프로젝트-작품">프로젝트 작품</h3>
+<div style="text-align: center;">
+<a href="/assets/img/posts/bms1.png" data-lity="">
+  <img src="/assets/img/posts/bms1.png" style="width: auto; max-height: 500px;" />
+</a>
+</div>
+
+<hr />
+
+<h3 id="작품-시연-영상">작품 시연 영상</h3>
+<div style="text-align: center;">
+<a href="/assets/img/posts/bms_test.gif" data-lity="">
+  <img src="/assets/img/posts/bms_test.gif" style="width: auto; max-height: 500px;" />
+</a>
+</div>
+<p>용량 제한으로 인해 영상의 일부인 블라인드 테스트만 게시.</p>
+
+<hr />
+
+<h2 id="github-저장소">GitHub 저장소</h2>
+<p><a href="https://github.com/radon99/radon99.github.io/buildingmanagement">프로젝트 코드 보기</a></p>
+
