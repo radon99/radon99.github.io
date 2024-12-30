@@ -31,27 +31,38 @@ layout: default
     </div>
 
     {% if page.prevPart != nil or page.nextPart != nil %}
-        <div class="post__navigator">
-            <div
-                class="post__navigator__buttons"
-                {% if page.prevPart == nil %}
-                    style="justify-content: flex-end;"
-                {% endif %}
-            >
-                {% if page.prevPart != nil %}
-                    <a href="{% link _posts/2021-06-16-syntax-example.md %}">
-                        <img  class="arrow-left" src="{{ site.url }}/assets/img/icons/arrow_left.svg"/>
-                        Previous
-                    </a>
-                {% endif %}
-                {% if page.nextPart != nil %}
-                    <a href="{% link _posts/2021-06-16-syntax-example.md %}">
-                        Next
-                        <img class="arrow-right" src="{{ site.url }}/assets/img/icons/arrow_right.svg"/>
-                    </a>
-                {% endif %}
-            </div>
-        </div>
+        <div class="post-navigation">
+	    {% assign posts = site.posts %}
+	    {% for post in posts %}
+		{% if post.url == page.url %}
+		    {% assign previous_index = forloop.index0 | minus: 1 %}
+		    {% assign next_index = forloop.index %}
+		    
+		    {% if previous_index >= 0 %}
+		        {% assign previous = posts[previous_index] %}
+		    {% endif %}
+		    
+		    {% if next_index < posts.size %}
+		        {% assign next = posts[next_index] %}
+		    {% endif %}
+		{% endif %}
+	    {% endfor %}
+
+	    {% if previous %}
+		<a href="{{ previous.url | relative_url }}">
+		    <img class="arrow-left" src="{{ site.url }}/assets/img/icons/arrow_left.svg" />
+		    Previous
+		</a>
+	    {% endif %}
+	    
+	    {% if next %}
+		<a href="{{ next.url | relative_url }}">
+		    Next
+		    <img class="arrow-right" src="{{ site.url }}/assets/img/icons/arrow_right.svg" />
+		</a>
+    {% endif %}
+</div>
+
     {% endif %}
 
     <div class="post__content">
