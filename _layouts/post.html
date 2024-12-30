@@ -30,38 +30,6 @@ layout: default
         {% endif %}
     </div>
 
-	{% assign posts = site.posts %}
-	{% assign current_index = nil %}
-
-	{% for post in posts %}
-	    {% if post.url == page.url %}
-		{% assign current_index = forloop.index0 %}
-	    {% endif %}
-	{% endfor %}
-
-	<div class="post-navigation">
-	    {% if current_index != nil %}
-		<div class="post-navigation-links">
-		    {% if current_index > 0 %}
-		        {% assign previous = posts[current_index | minus: 1] %}
-		        <a href="{{ previous.url | relative_url }}">
-		            <img class="arrow-left" src="{{ site.url }}/assets/img/icons/arrow_left.svg" />
-		            Previous
-		        </a>
-		    {% endif %}
-
-		    {% if current_index < posts.size | minus: 1 %}
-		        {% assign next = posts[current_index | plus: 1] %}
-		        <a href="{{ next.url | relative_url }}">
-		            Next
-		            <img class="arrow-right" src="{{ site.url }}/assets/img/icons/arrow_right.svg" />
-		        </a>
-		    {% endif %}
-		</div>
-	    {% endif %}
-	</div>
-
-
     <div class="post__content">
         {{ content }}
     </div>
