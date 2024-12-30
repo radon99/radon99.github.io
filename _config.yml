@@ -8,6 +8,10 @@ url: "https://radon99.github.io" # the base hostname & protocol for your site, e
 # Build settings
 #theme: jekyll-theme-simplex
 remote_theme: andreondra/jekyll-theme-simplex
+plugins:
+    - jekyll-remote-theme
+
+logo_img: /assets/img/icons/logo.png #Absolute path to the logo. If not specified, the title will be displayed instead.
 copyright: © Golasowski 2021, icons by Flaticon.com #Your copyright.
 
 sass:
