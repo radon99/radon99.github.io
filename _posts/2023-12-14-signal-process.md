@@ -101,7 +101,7 @@ FIRE : Output2 출력을 shift한 출력 spectrogram
 
 ## GitHub 저장소
 
-[프로젝트 코드 보기](https://github.com/radon99/radon99.github.io/tree/main/SignalProcessing)
+[프로젝트 코드 보기](https://github.com/radon99/radon99.github.io/tree/main/projects/SignalProcessing)
 
 
 
