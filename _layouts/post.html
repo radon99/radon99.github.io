@@ -32,19 +32,20 @@ layout: default
 
     {% if page.prevPart != nil or page.nextPart != nil %}
         <div class="post__navigator">
-            <div class="post__navigator__buttons"
+            <div
+                class="post__navigator__buttons"
                 {% if page.prevPart == nil %}
                     style="justify-content: flex-end;"
                 {% endif %}
             >
                 {% if page.prevPart != nil %}
-                    <a href="{% link {{ page.prevPart | relative_url }} %}">
+                    <a href="{% link {{ site.url }}/{{ page.prevPart }} %}">
                         <img  class="arrow-left" src="{{ site.url }}/assets/img/icons/arrow_left.svg"/>
                         Previous
                     </a>
                 {% endif %}
                 {% if page.nextPart != nil %}
-                    <a href="{% link {{ page.nextPart | relative_url }} %}">
+                    <a href="{% link {{ site.url }}/{{ page.nextPart }} %}">
                         Next
                         <img class="arrow-right" src="{{ site.url }}/assets/img/icons/arrow_right.svg"/>
                     </a>
