@@ -30,3 +30,8 @@ defaults:
       type: category
     values:
       layout: "category"
+
+strict_front_matter: true
+liquid:
+  error_mode: strict
+
