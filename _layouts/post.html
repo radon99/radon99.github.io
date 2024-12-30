@@ -30,31 +30,28 @@ layout: default
         {% endif %}
     </div>
 
-{% raw %}
-	{% if page.prevPart != nil or page.nextPart != nil %}
-	    <div class="post__navigator">
-		<div class="post__navigator__buttons"
-		    {% if page.prevPart == nil %}
-		        style="justify-content: flex-end;"
-		    {% endif %}
-		>
-		    {% if page.prevPart != nil %}
-		        <a href="{{ site.baseurl }}{{ page.prevPart }}">
-		            <img class="arrow-left" src="{{ site.url }}/assets/img/icons/arrow_left.svg"/>
-		            Previous
-		        </a>
-		    {% endif %}
-		    {% if page.nextPart != nil %}
-		        <a href="{{ site.baseurl }}{{ page.nextPart }}">
-		            Next
-		            <img class="arrow-right" src="{{ site.url }}/assets/img/icons/arrow_right.svg"/>
-		        </a>
-		    {% endif %}
-		</div>
-	    </div>
-	{% endif %}
-{% endraw %}
-
+    {% if page.prevPart != nil or page.nextPart != nil %}
+        <div class="post__navigator">
+            <div class="post__navigator__buttons"
+                {% if page.prevPart == nil %}
+                    style="justify-content: flex-end;"
+                {% endif %}
+            >
+                {% if page.prevPart != nil %}
+                    <a href="{{ page.prevPart | relative_url }}">
+                        <img  class="arrow-left" src="{{ site.url }}/assets/img/icons/arrow_left.svg"/>
+                        Previous
+                    </a>
+                {% endif %}
+                {% if page.nextPart != nil %}
+                    <a href="{{ page.nextPart | relative_url }}">
+                        Next
+                        <img class="arrow-right" src="{{ site.url }}/assets/img/icons/arrow_right.svg"/>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
 
     <div class="post__content">
         {{ content }}
