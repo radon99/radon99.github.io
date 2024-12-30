@@ -1,0 +1,4 @@
+[LOGIC]
+[COMMON]
+CELL comp comp
+CELL sim_comp sim_comp

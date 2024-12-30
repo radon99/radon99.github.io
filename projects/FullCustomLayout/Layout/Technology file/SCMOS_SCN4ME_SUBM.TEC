@@ -1,0 +1,440 @@
+#----------------------------------------------
+%	definition
+#----------------------------------------------
+nwell
+active
+thk_active
+poly
+nplus
+pplus
+poly2
+contact
+via
+metal1
+metal2
+via2
+metal3
+via3
+metal4
+glass
+probe
+res_mask
+polytxt
+me1txt
+me2txt
+me3txt
+me4txt
+#----------------------------------------------
+%	stipple_file
+#----------------------------------------------
+STIPPLE.LST
+#----------------------------------------------
+%	cif_name
+#----------------------------------------------
+nwell		CWN
+active		CAA
+thk_active		CUK
+poly		CPG
+nplus		CSN
+pplus		CSP
+poly2		OPS
+contact		CCC
+via		CV1
+metal1		CM1
+metal2		CM2
+via2		CV2
+metal3		CM3
+via3		CV3
+metal4		CM4
+glass		COG
+probe		XP
+res_mask		CRM
+polytxt		CPT
+me1txt		CM1T
+me2txt		CM2T
+me3txt		CM3T
+me4txt		CM4T
+#----------------------------------------------
+%	dxf_name
+#----------------------------------------------
+nwell		DXF
+active		DXF
+thk_active		DXF
+poly		DXF
+nplus		DXF
+pplus		DXF
+poly2		DXF
+contact		DXF
+via		DXF
+metal1		DXF
+metal2		DXF
+via2		DXF
+metal3		DXF
+via3		DXF
+metal4		DXF
+glass		DXF
+probe		DXF
+res_mask		DXF
+polytxt		DXF
+me1txt		DXF
+me2txt		DXF
+me3txt		DXF
+me4txt		DXF
+#----------------------------------------------
+%	gds_num
+#----------------------------------------------
+nwell		42
+active		43
+thk_active		60
+poly		46
+nplus		45
+pplus		44
+poly2		56
+contact		25
+via		50
+metal1		49
+metal2		51
+via2		61
+metal3		62
+via3		30
+metal4		31
+glass		34
+probe		26
+res_mask		79
+polytxt		74
+me1txt		75
+me2txt		76
+me3txt		77
+me4txt		78
+#----------------------------------------------
+%	color
+#----------------------------------------------
+nwell		255	255	0
+active		0	198	0
+thk_active		255	255	0
+poly		255	0	0
+nplus		196	0	196
+pplus		255	161	0
+poly2		255	128	64
+contact		128	128	128
+via		125	125	0
+metal1		0	0	250
+metal2		0	255	255
+via2		0	198	0
+metal3		255	213	0
+via3		255	128	0
+metal4		212	153	255
+glass		255	255	157
+probe		255	0	0
+res_mask		0	255	0
+polytxt		255	0	0
+me1txt		0	0	255
+me2txt		0	204	204
+me3txt		255	213	0
+me4txt		212	153	255
+#----------------------------------------------
+%	fill_style
+#----------------------------------------------
+nwell		empty
+active		stipple_9
+thk_active		empty
+poly		stipple_9
+nplus		stipple_3
+pplus		stipple_3
+poly2		stipple_10
+contact		solid
+via		solid
+metal1		stipple_2
+metal2		stipple_3
+via2		solid
+metal3		stipple_2
+via3		solid
+metal4		stipple_3
+glass		solid
+probe		empty
+res_mask		empty
+polytxt		empty
+me1txt		empty
+me2txt		empty
+me3txt		empty
+me4txt		stipple_5
+#----------------------------------------------
+%	line_color
+#----------------------------------------------
+nwell		255	255	0
+active		0	198	0
+thk_active		255	255	0
+poly		255	0	0
+nplus		196	0	196
+pplus		255	161	0
+poly2		255	128	64
+contact		128	128	128
+via		125	125	0
+metal1		0	0	250
+metal2		0	255	255
+via2		0	198	0
+metal3		255	213	0
+via3		255	128	0
+metal4		212	153	255
+glass		255	255	157
+probe		255	0	0
+res_mask		0	255	0
+polytxt		255	0	0
+me1txt		0	0	255
+me2txt		0	204	204
+me3txt		255	213	0
+me4txt		212	153	255
+#----------------------------------------------
+%	line_style
+#----------------------------------------------
+nwell		0
+active		0
+thk_active		0
+poly		0
+nplus		0
+pplus		0
+poly2		0
+contact		0
+via		0
+metal1		0
+metal2		0
+via2		0
+metal3		0
+via3		0
+metal4		0
+glass		0
+probe		0
+res_mask		0
+polytxt		0
+me1txt		0
+me2txt		0
+me3txt		0
+me4txt		0
+#----------------------------------------------
+%	line_width
+#----------------------------------------------
+nwell		1
+active		1
+thk_active		1
+poly		1
+nplus		1
+pplus		1
+poly2		1
+contact		1
+via		1
+metal1		1
+metal2		1
+via2		1
+metal3		1
+via3		1
+metal4		1
+glass		1
+probe		1
+res_mask		1
+polytxt		1
+me1txt		1
+me2txt		1
+me3txt		1
+me4txt		1
+#----------------------------------------------
+%	line_color_sel
+#----------------------------------------------
+nwell		255	0	0
+active		255	0	0
+thk_active		255	0	0
+poly		255	0	0
+nplus		255	0	0
+pplus		255	0	0
+poly2		255	0	0
+contact		255	0	0
+via		255	0	0
+metal1		255	0	0
+metal2		255	0	0
+via2		255	0	0
+metal3		255	0	0
+via3		255	0	0
+metal4		255	0	0
+glass		255	0	0
+probe		255	0	0
+res_mask		255	0	0
+polytxt		255	0	0
+me1txt		255	0	0
+me2txt		255	0	0
+me3txt		255	0	0
+me4txt		255	0	0
+#----------------------------------------------
+%	line_style_sel
+#----------------------------------------------
+nwell		0
+active		0
+thk_active		0
+poly		0
+nplus		0
+pplus		0
+poly2		0
+contact		0
+via		0
+metal1		0
+metal2		0
+via2		0
+metal3		0
+via3		0
+metal4		0
+glass		0
+probe		0
+res_mask		0
+polytxt		0
+me1txt		0
+me2txt		0
+me3txt		0
+me4txt		0
+#----------------------------------------------
+%	line_width_sel
+#----------------------------------------------
+nwell		3
+active		3
+thk_active		1
+poly		3
+nplus		3
+pplus		3
+poly2		3
+contact		3
+via		3
+metal1		3
+metal2		3
+via2		3
+metal3		3
+via3		3
+metal4		3
+glass		1
+probe		1
+res_mask		3
+polytxt		3
+me1txt		3
+me2txt		3
+me3txt		3
+me4txt		3
+#----------------------------------------------
+%	path
+#----------------------------------------------
+nwell		1.000	0	0.000	0.0
+active		1.000	0	0.000	0.0
+thk_active		1.000	0	0.000	0.0
+poly		1.000	0	0.000	0.0
+nplus		1.000	0	0.000	0.0
+pplus		1.000	0	0.000	0.0
+poly2		1.000	0	0.000	0.0
+contact		1.000	0	0.000	0.0
+via		1.000	0	0.000	0.0
+metal1		1.000	0	0.000	0.0
+metal2		1.000	0	0.000	0.0
+via2		1.000	0	0.000	0.0
+metal3		1.000	0	0.000	0.0
+via3		1.000	0	0.000	0.0
+metal4		1.000	0	0.000	0.0
+glass		1.000	0	0.000	0.0
+probe		1.000	0	0.000	0.0
+res_mask		1.000	0	0.000	0.0
+polytxt		1.000	0	0.000	0.0
+me1txt		1.000	0	0.000	0.0
+me2txt		1.000	0	0.000	0.0
+me3txt		1.000	0	0.000	0.0
+me4txt		1.000	0	0.000	0.0
+#----------------------------------------------
+%	datatype
+#----------------------------------------------
+nwell		0
+active		0
+thk_active		0
+poly		0
+nplus		0
+pplus		0
+poly2		0
+contact		0
+via		0
+metal1		0
+metal2		0
+via2		0
+metal3		0
+via3		0
+metal4		0
+glass		0
+probe		0
+res_mask		0
+polytxt		0
+me1txt		0
+me2txt		0
+me3txt		0
+me4txt		0
+#----------------------------------------------
+%	textsize
+#----------------------------------------------
+nwell		0.5
+active		0.5
+thk_active		1.0
+poly		0.5
+nplus		0.5
+pplus		0.5
+poly2		0.5
+contact		0.5
+via		0.5
+metal1		0.5
+metal2		0.5
+via2		0.5
+metal3		0.5
+via3		0.5
+metal4		0.5
+glass		1.0
+probe		1.0
+res_mask		0.5
+polytxt		1.0
+me1txt		0.5
+me2txt		0.5
+me3txt		1.0
+me4txt		1.0
+#----------------------------------------------
+%	priority
+#----------------------------------------------
+nwell		17
+active		11
+thk_active		10
+poly		6
+nplus		8
+pplus		9
+poly2		5
+contact		15
+via		14
+metal1		4
+metal2		3
+via2		13
+metal3		2
+via3		12
+metal4		1
+glass		16
+probe		18
+res_mask		7
+polytxt		23
+me1txt		22
+me2txt		21
+me3txt		20
+me4txt		19
+#----------------------------------------------
+%	sys_color
+#----------------------------------------------
+background	0	0	0
+foreground	255	255	255
+text		255	255	255
+noselect	0	128	0
+cellbound	255	255	255
+grid		255	255	255
+drag		255	0	0
+error		255	0	0
+ruler		255	255	255
+instance_select		255	0	0
+edge_vertex		0	0	255
+#----------------------------------------------
+%	rule
+#----------------------------------------------
+DRC_RULE		Layout Verification Rule\SCMOS_SCN4ME_SUBM_DRC.rul
+EXTRACTION_RULE		Layout Verification Rule\SCMOS_SCN4ME_SUBM_ERC.rul
+#----------------------------------------------

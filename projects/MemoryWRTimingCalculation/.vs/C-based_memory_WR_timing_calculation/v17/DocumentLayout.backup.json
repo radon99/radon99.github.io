@@ -1,0 +1,53 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\iot02\\Desktop\\\uD504\uB85C\uC81D\uD2B8\\C-based_memory_WR_timing_calculation\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E8F02B25-0DF5-4A80-BC0D-A398FDC76C35}|C-based_memory_WR_timing_calculation\\C-based_memory_WR_timing_calculation.vcxproj|C:\\Users\\iot02\\Desktop\\\uD504\uB85C\uC81D\uD2B8\\C-based_memory_WR_timing_calculation\\C-based_memory_WR_timing_calculation\\C_Based_Memory_WR_Timing_Calculate_Simulation_Program.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E8F02B25-0DF5-4A80-BC0D-A398FDC76C35}|C-based_memory_WR_timing_calculation\\C-based_memory_WR_timing_calculation.vcxproj|solutionrelative:C-based_memory_WR_timing_calculation\\C_Based_Memory_WR_Timing_Calculate_Simulation_Program.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8F02B25-0DF5-4A80-BC0D-A398FDC76C35}|C-based_memory_WR_timing_calculation\\C-based_memory_WR_timing_calculation.vcxproj|C:\\Users\\iot02\\Desktop\\\uD504\uB85C\uC81D\uD2B8\\C-based_memory_WR_timing_calculation\\C-based_memory_WR_timing_calculation\\C_Based_Memory_WR_Timing_Calculate_Simulation_Program.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E8F02B25-0DF5-4A80-BC0D-A398FDC76C35}|C-based_memory_WR_timing_calculation\\C-based_memory_WR_timing_calculation.vcxproj|solutionrelative:C-based_memory_WR_timing_calculation\\C_Based_Memory_WR_Timing_Calculate_Simulation_Program.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 803,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "C_Based_Memory_WR_Timing_Calculate_Simulation_Program.h",
+              "DocumentMoniker": "C:\\Users\\iot02\\Desktop\\\uD504\uB85C\uC81D\uD2B8\\C-based_memory_WR_timing_calculation\\C-based_memory_WR_timing_calculation\\C_Based_Memory_WR_Timing_Calculate_Simulation_Program.h",
+              "RelativeDocumentMoniker": "C-based_memory_WR_timing_calculation\\C_Based_Memory_WR_Timing_Calculate_Simulation_Program.h",
+              "ToolTip": "C:\\Users\\iot02\\Desktop\\\uD504\uB85C\uC81D\uD2B8\\C-based_memory_WR_timing_calculation\\C-based_memory_WR_timing_calculation\\C_Based_Memory_WR_Timing_Calculate_Simulation_Program.h",
+              "RelativeToolTip": "C-based_memory_WR_timing_calculation\\C_Based_Memory_WR_Timing_Calculate_Simulation_Program.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-08-30T01:27:40.23Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "C_Based_Memory_WR_Timing_Calculate_Simulation_Program.c",
+              "DocumentMoniker": "C:\\Users\\iot02\\Desktop\\\uD504\uB85C\uC81D\uD2B8\\C-based_memory_WR_timing_calculation\\C-based_memory_WR_timing_calculation\\C_Based_Memory_WR_Timing_Calculate_Simulation_Program.c",
+              "RelativeDocumentMoniker": "C-based_memory_WR_timing_calculation\\C_Based_Memory_WR_Timing_Calculate_Simulation_Program.c",
+              "ToolTip": "C:\\Users\\iot02\\Desktop\\\uD504\uB85C\uC81D\uD2B8\\C-based_memory_WR_timing_calculation\\C-based_memory_WR_timing_calculation\\C_Based_Memory_WR_Timing_Calculate_Simulation_Program.c",
+              "RelativeToolTip": "C-based_memory_WR_timing_calculation\\C_Based_Memory_WR_Timing_Calculate_Simulation_Program.c",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGsAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2024-08-29T00:33:14.024Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

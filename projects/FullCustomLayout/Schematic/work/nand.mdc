@@ -1,0 +1,4 @@
+// This context file was created by MyCAD Design Manager
+// 
+LIBRARY nand .\nand.lib
+LIBRARY Analog ..\..\..\Library\MyAnalog\Analog.lib

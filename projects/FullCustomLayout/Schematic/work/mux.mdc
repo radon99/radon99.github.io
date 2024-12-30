@@ -1,0 +1,6 @@
+// This context file was created by MyCAD Design Manager
+// 
+LIBRARY mux .\mux.lib
+LIBRARY Analog ..\..\..\Library\MyAnalog\Analog.lib
+LIBRARY inverter .\inverter.lib
+LIBRARY tran .\tran.lib

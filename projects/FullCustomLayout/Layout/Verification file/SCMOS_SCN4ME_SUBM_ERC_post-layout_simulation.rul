@@ -1,0 +1,138 @@
+;###################################################################################
+;# MyCAD, Inc. shall not be liable for the accuracy of                             #
+;# this design rule file or it's ability to capture errors.                        #
+;# The user is responsible for thoroughly testing and implementing                 #
+;# it's features.                                                                  #
+;###################################################################################
+;
+;##########################################################################################
+;# MOSIS SCMOS 0.35um Extraction, ERC and LVS rule for MyChip (ref. http://www.mosis.com) #
+;# TSMC (0.35um N-well) SCN4ME_SUBM (Lambda=0.2 um)			                  #
+;# by MyCAD Support Group							          #
+;#										          #
+;# Support Information:                                                                   #
+;#                                                                                        #
+;# This rule file is supported by MyCAD, Inc. customer support.                           #
+;# For contact information consult support@seloco.com                                     #
+;#                                                                                        #
+;# Revision History:                                                                      #
+;#                                                                                        #
+;# 08/17/2004      Build                                                                  #
+;#                                                                                        #
+;# 08/20/2004      First Release                                                          #
+;##########################################################################################
+;
+;###################################################################################
+;# DESCRIPTION BLOCK								   #
+;###################################################################################
+;
+;technology layers: nwell active thk_active pplus nplus poly poly2 contact 
+;                   metal1 via metal2 via2 metal3 via3 metal4
+;                   glass
+;                   probe (non-fab layer used to highlight pads)
+;
+*DESCRIPTION
+;
+MODEL = MOS[P],pmos  MOS[N],nmos
+MODEL = DIO[P],pdio  DIO[N],ndio
+MODEL = CAP[P],C
+MODEL = RES[P],R
+;
+CHECK-MODE = FLAT
+;
+*LAYER
+;
+SUBSTRATE = pbulk
+;
+CONNECT-LAYER = psub nwell psd nsd ipoly poly2 metal1 metal2 metal3 metal4
+;
+ATTACH	me1txt	TO	metal1
+ATTACH	me2txt	TO	metal2
+ATTACH	me3txt	TO	metal3
+ATTACH	me4txt	TO	metal4
+;
+;
+;##################################################################################
+;# OPERATION BLOCK								  #
+;##################################################################################
+;
+*OPERATION
+;
+; p-substrate
+NOT	pbulk	nwell		psub
+; gate and source/drain for MOS
+AND	active	pplus		pactive
+AND	active	nplus		nactive
+OR 	pplus	nplus		allselect
+AND	pactive	poly		pgate
+AND	nactive	poly		ngate
+NOT	nactive	poly		nsd
+NOT	pactive	poly		psd
+; well and substrate contact
+AND	psub	psd		pplug
+AND	nwell	nsd		nplug
+AND	pplug	contact		ppcont
+AND	nplug	contact		npcont
+; poly resistor
+AND	poly	res_mask	polres
+NOT	poly	polres		ipoly
+; capacitor of poly and poly2 
+AND	poly	poly2		polycap
+; parasitic capacitor between poly and metal1
+AND	metal1	ipoly		me1poly
+; parasitic capacitor between poly and metal2
+AND	metal2	ipoly		me2poly
+; parasitic capacitor between metal1 and metal2
+AND	metal1	metal2		me1me2
+; parasitic diode
+AND	psd	nwell		pdio
+AND	nsd	psub		ndio
+; interlayer connection
+CONNECT		metal4	metal3	BY	via3
+CONNECT		metal3	metal2	BY	via2
+CONNECT		metal2	metal1	BY	via
+CONNECT		metal1	poly2	BY	contact
+CONNECT		metal1	ipoly	BY	contact
+CONNECT		metal1	psd	BY	contact
+CONNECT		metal1	nsd	BY	contact
+; well and substrate connection
+SCONNECT	psd	psub	BY	ppcont
+SCONNECT	nsd	nwell	BY	npcont
+;
+; polysilicon resistor
+ELEMENT		RES[P]	polres	ipoly
+PARAMETER	RES[P]  400.0
+; mos
+ELEMENT		MOS[P]	pgate	ipoly	psd		nwell
+ELEMENT		MOS[N]	ngate	ipoly	nsd		psub
+; parasitic diode
+;ELEMENT		DIO[P]	pdio	psd	nwell
+;ELEMENT		DIO[N]	ndio	nsd	psub
+; polysilicon capacitor
+ELEMENT		CAP[P]	polycap	ipoly	poly2
+PARAMETER	CAP[P]  8.30e-4	0.0
+; parasitic capacitor between poly and metal1
+PARASITIC	CAP[A]	me1poly	metal1	ipoly
+ATTRIBUTE	CAP[A]  4.40e-5	5.70e-5
+; parasitic capacitor between poly and metal2
+PARASITIC	CAP[B]	me2poly	metal2	ipoly
+ATTRIBUTE	CAP[B]	1.50e-5	3.80e-5
+; parasitic capacitor between metal1 and metal2
+PARASITIC	CAP[C]	me1me2	metal1	metal2
+ATTRIBUTE	CAP[C]	3.40e-5	5.40e-5
+;
+; ERC
+MULTILAB				"Short circuit"
+SAMELAB					"Open circuit"
+;PATHCHK		LEVEL 1			"no path to power"
+LCONNECT	psub CONN VDD		"psub connected to power"
+LCONNECT	psub DISC GND		"psub not connected to ground"
+;ELCOUNT		MOS ALL EQ 1		"singular node"
+NDCOUNT		MOS ALL EQ 1		"all terminal tied together"
+ECONNECT	MOS[N] ipoly CONN VDD	"n-mos gate connected to power"
+ECONNECT	MOS[P] ipoly CONN GND	"p-mos gate connected to ground"
+ECONNECT	MOS[P] psd   CONN GND	"p-mos source/drain connected to ground"
+;
+; LVSCHK
+LVSCHK[CS]WPERCENT=5 LPERCENT=5 CAPAREA=5 CAPVAL=5 DIOAREA=10 DIOPERI=10 RESVAL=10
+*END

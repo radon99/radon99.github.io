@@ -1,0 +1,4 @@
+[LOGIC]
+[COMMON]
+CELL mux mux
+CELL sim_mux sim_mux

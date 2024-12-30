@@ -9,13 +9,12 @@ author: jsh #Author's nick.
 ---
 
 # **Digital Fan 프로젝트**
+
 <div style="text-align: center;">
-<a href="/assets/img/posts/DigitalFan_main.jpg" data-lity>
-  <img src="/assets/img/posts/DigitalFan_main.jpg" style="width: auto; max-height: 500px;"/>
+<a href="/assets/img/posts/DigitalFan_main.png" data-lity>
+  <img src="/assets/img/posts/DigitalFan_main.png" style="width: auto; max-height: 500px;"/>
 </a>
 </div>
-
-
 
 ## 개요
 
@@ -192,6 +191,15 @@ DigitalFan
 ├── Debug               # 빌드된 실행 파일
 └── README.md           # 프로젝트 설명
   </pre>
+</div>
+
+---
+
+## 결과 사진
+<div style="text-align: center;">
+<a href="/assets/img/posts/DigitalFan_result.jpg" data-lity>
+  <img src="/assets/img/posts/DigitalFan_result.jpg" style="width: auto; max-height: 500px;"/>
+</a>
 </div>
 
 ---

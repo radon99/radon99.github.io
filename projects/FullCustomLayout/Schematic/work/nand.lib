@@ -1,0 +1,4 @@
+[LOGIC]
+[COMMON]
+CELL nand nand
+CELL sim_nand sim_nand

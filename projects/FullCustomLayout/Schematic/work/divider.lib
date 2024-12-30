@@ -1,0 +1,5 @@
+[LOGIC]
+[COMMON]
+CELL divider divider
+CELL sim_divider sim_divider
+CELL buf buf

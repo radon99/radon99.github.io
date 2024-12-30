@@ -1,0 +1,249 @@
+;###################################################################################
+;# MyCAD, Inc. shall not be liable for the accuracy of                             #
+;# this design rule file or it's ability to capture errors.                        #
+;# The user is responsible for thoroughly testing and implementing                 #
+;# it's features.                                                                  #
+;###################################################################################
+;
+;###################################################################################
+;# MOSIS SCMOS 0.35um Design rule for MyChip (ref. http://www.mosis.com)           #
+;# TSMC (0.35um N-well) SCN4ME_SUBM (Lambda=0.2 um)			           #
+;# by MyCAD Support Group							   #
+;#										   #
+;# Support Information:                                                            #
+;#                                                                                 #
+;# This rule file is supported by MyCAD, Inc. customer support.                    #
+;# For contact information consult support@seloco.com                              #
+;#                                                                                 #
+;# Revision History:                                                               #
+;#                                                                                 #
+;# 08/17/2004      Build                                                           #
+;#                                                                                 #
+;# 08/20/2004      First Release                                                   #
+;# 11/30/2009      Second Release by jhpark                                        #
+;#                 Modified ENC and AREA for design rule error                     #
+;###################################################################################
+;
+;###################################################################################
+;# DESCRIPTION BLOCK								   #
+;###################################################################################
+;
+;technology layers: nwell active thk_active pplus nplus poly poly2 contact 
+;                   metal1 via metal2 via2 metal3 via3 metal4
+;                   glass
+;                   probe (non-fab layer used to highlight pads)
+;
+*DESCRIPTION
+LAMBDA = 0.2
+CHECK-MODE = FLAT
+;
+;
+;##################################################################################
+;# LAYER BLOCK									  #
+;##################################################################################
+;
+*LAYER
+SUBSTRATE = pbulk
+CONNECT-LAYER = psub nwell psd nsd poly poly2 metal1 metal2 metal3 metal4
+;
+;
+;##################################################################################
+;# OPERATION BLOCK								  #
+;##################################################################################
+;
+*OPERATION
+NOT	pbulk	nwell	psub
+AND	active	pplus	pactive
+AND	active	nplus	nactive
+OR	pplus	nplus	allselect
+AND	pactive	poly	pgate
+AND	nactive	poly	ngate
+NOT	pactive pgate	psd
+NOT	nactive ngate	nsd
+AND	psub	psd	pplug
+AND	nwell	nsd	nplug
+AND	pplug	contact	ppcont
+AND	nplug	contact	npcont
+; Interlayer connection
+CONNECT		metal4	metal3	BY	via3
+CONNECT		metal3	metal2	BY	via2
+CONNECT		metal2	metal1	BY	via
+CONNECT		metal1	poly	BY	contact
+CONNECT		metal1	poly2	BY	contact
+CONNECT		metal1	psd	BY	contact
+CONNECT		metal1	nsd	BY	contact
+; Substrate & Well connection
+SCONNECT	psd	psub	BY	ppcont
+SCONNECT	nsd	nwell	BY	npcont
+;
+;###############################################################################
+; n-well(Lambda base)
+;###############################################################################
+WIDTH		nwell LT 12		"Rule 1.1:width(n-well) < 12"
+EXT[N]		nwell LT 18		"Rule 1.2:space(n-well) diff vtg < 18"
+EXT[N']		nwell LT 6		"Rule 1.3:space(n-well) same vtg < 6"
+;###############################################################################
+; active(Lambda base)
+;###############################################################################
+WIDTH		active LT 3		"Rule 2.1:width(active) < 3"
+EXT		active LT 3		"Rule 2.2:space(active) < 3"
+ENC		pactive nwell LT 6 	"Rule 2.3.1:well edge with pactive < 6"
+EXT		nactive nwell LT 6 	"Rule 2.3.2:well edge with nactive < 6"
+ENC		nplug nwell LT 3  	"Rule 2.4.1:well contact space with nplug < 3"
+EXT		pplug nwell LT 3   	"Rule 2.4.2:well contact space with pplug < 3"
+AND	nactive	pactive	npact
+ERROR	npact				"Rule 2.5.1:no overlap violation"
+SELECT	pactive OVERLAP	nactive	overpact
+SELECT	nactive	OVERLAP pactive	overnact
+NOT	pactive overpact notoverpact
+NOT	nactive	overnact notovernact
+EXT	notovernact notoverpact LT 4	"Rule 2.5.2:space(nactive,pactive) < 4"
+;###############################################################################
+; thick active (Lambda base)
+;###############################################################################
+WIDTH   thk_active              LT 4    "Rule 24.1: width(thick active) < 4"
+EXT     thk_active              LT 4    "Rule 24.2: space(thick active) < 4"
+ENC     active      thk_active  LT 4	"Rule 24.3: active overlap < 4"
+SELECT  thk_active ENCLOSE active encthk
+EXT     thk_active  active      LT 4    "Rule 24.4. space(thick active, active) < 4"
+AND     thk_active         active thkact
+AND     thkact             poly   thkgate
+WIDTH   thkgate                 LT 3    "Rule 24.5. width(thick active gate poly) < 3"
+NOT     thk_active         encthk nonthk
+ERROR   nonthk                          "Rule 24.6. Not enclose active"
+;###############################################################################
+; poly(Lambda base)
+;###############################################################################
+WIDTH		poly LT 2		"Rule 3.1:width(poly) < 2"
+EXT		poly LT 3		"Rule 3.2:space(poly) < 3"
+SELECT		poly   CUT active  polyact
+AND 		active	   polyact actpact
+ENC[T] actpact active LT 0.001 &
+ENC[T] actpact polyact LT 2 "Rule 3.3:min gate poly extension over active < 2"
+SELECT          active CUT poly actpoly
+AND poly actpoly polyapoly
+ENC[T] polyapoly poly LT 0.001 &
+ENC[T] polyapoly actpoly LT 3 	"Rule 3.4:min active extension over gate poly < 3"
+OR		poly active   polact
+EXT[H]	polact LT 1 		"Rule 3.5:min space between active and routing poly < 1"
+;###############################################################################
+; poly2(Lambda base) for Capacitor
+;###############################################################################
+WIDTH		poly2 LT 7		"Rule 11.1:width(poly2) < 7"
+EXT		poly2 LT 3		"Rule 11.2:space(poly2) < 3"
+
+ENC		poly2   poly      LT 5  "Rule 11.3:Minimum overlap by Poly < 5"
+EXT		poly2   nwell     LT 2  "Rule 11.4:space(poly2,nwell) < 2"
+EXT		poly2   active    LT 2  "Rule 11.4:space(poly2,active) < 2" 
+EXT		poly2   contact   LT 6  "Rule 11.5:space(poly2,contact) < 6"
+SELECT	NOT	metal1 CUT poly2 notmet1p2
+EXT		poly2   notmet1p2 LT 2  "Rule 11.6:min spacing to metal < 2"
+;###############################################################################
+; select(Lambda base)
+;###############################################################################
+ENC[O] active poly LT 0.001 &
+EXT		allselect poly LT 3	"Rule 4.1:min select spacing to channel < 3"
+ENC		active pplus  LT 2	"Rule 4.2.1:Minimum overlap by pplus < 2"
+ENC		active nplus  LT 2	"Rule 4.2.2:Minimum overlap by nplus < 2"
+ENC		contact pplus LT 1	"Rule 4.3.1:Minimum overlap by pplus < 1"
+ENC		contact nplus LT 1	"Rule 4.3.2:Minimum overlap by nplus < 1"
+WIDTH		pplus         LT 2	"Rule 4.4.1:min p+ select width < 2"
+WIDTH		nplus         LT 2	"Rule 4.4.2:min n+ select width < 2"
+EXT		pplus         LT 2	"Rule 4.4.3:min p+ select space < 2"
+EXT		nplus         LT 2	"Rule 4.4.4:min n+ select space < 2"
+AND	nplus pplus npplus
+ERROR		npplus			"Rule 4.4.5:no overlap violation"
+SELECT	nplus    OVERLAP pplus    overnplus
+SELECT	pplus    OVERLAP nplus    overpplus
+NOT	nplus    overnplus	  notovernplus
+NOT	pplus    overpplus        notoverpplus
+EXT	notovernplus notoverpplus LT 2 "Rule 4.4.6:min space(between n+ and p+ select) < 2"
+;###############################################################################
+; simple contact to poly(Lambda base)
+;###############################################################################
+LENGTH		contact NE 2		"Rule 5.1.1:exact contact size != 2"	
+AREA		contact NE 0.8		"Rule 5.1.2:exact contact area(um2) != 0.8"	
+ENC		contact poly  LT 1.5 	"Rule 5.2:Minimum overlap by Poly < 1.5"
+EXT		contact LT 3		"Rule 5.3:space(contact) < 3"
+EXT		contact pgate LT 2	"Rule 5.4.1:space(contact) < 2"
+EXT		contact ngate LT 2	"Rule 5.4.2:space(contact) < 2"
+;###############################################################################
+; simple contact to active(Lambda base)
+;###############################################################################
+ENC		contact active LT 1.5 	"Rule 6.2:Minimum overlap by Active  < 1.5"
+;###############################################################################
+; contact to poly2(Lambda base)
+;###############################################################################
+AND     contact   poly2     poly2cont
+AND     poly      poly2     polycap
+AND     poly2cont polycap   pcapcont
+NOT     poly2cont pcapcont  npcapcont
+ENC             pcapcont  poly2  LT 3   "Rule 13.3:Minimum overlap by poly2 < 3"
+ENC             npcapcont poly2  LT 2   "Rule 13.4:Minimum overlap by poly2 < 2"
+EXT             poly2cont poly   LT 3   "Rule 13.5:space(poly2 contact,poly) < 3"
+EXT             poly2cont active LT 3   "Rule 13.5:space(poly2 contact,active) < 3"
+;###############################################################################
+; metal1(Lambda base)
+;###############################################################################
+WIDTH		metal1         LT 3	"Rule 7.1:width(metal1) < 3"
+EXT		metal1         LT 3	"Rule 7.2:space(metal1) < 3"
+ENC		contact metal1 LT 1	"Rule 7.3:Minimum overlap by metal1 < 1"
+;###############################################################################
+; via(Lambda base)
+;###############################################################################
+LENGTH		via         NE 2	"Rule 8.1.1:exact via size != 2"	
+AREA		via         NE 0.8	"Rule 8.1.4:exact via area(um2) != 0.8"
+
+EXT		via         LT 3	"Rule 8.2:min via space < 3"
+ENC		via metal1  LT 1	"Rule 8.3:Minimum overlap by metal1 < 1"
+EXT		via contact LT 2	"Rule 8.4:min space(via,contact) < 2"
+EXT		via poly    LT 2	"Rule 8.5.1:min space(via,poly) < 2"
+EXT		via active  LT 2	"Rule 8.5.2:min space(via,active) < 2"
+;###############################################################################
+; metal2(Lambda base)
+;###############################################################################
+WIDTH		metal2     LT 3		"Rule 9.1:min width(metal2) < 3"
+EXT		metal2     LT 3		"Rule 9.2:min space(metal2) < 3"
+ENC		via metal2 LT 1		"Rule 9.3:Minimum overlap by metal2 < 1"
+;###############################################################################
+; via2(Lambda base)
+;###############################################################################
+LENGTH		via2        NE 2	"Rule 14.1.1:exact via2 size != 2"	
+AREA		via2        NE 0.8	"Rule 14.1.3:exact via2 area(um2) != 0.8"
+EXT		via2        LT 3	"Rule 14.2:min via2 space < 3"
+ENC		via2 metal2 LT 1	"Rule 14.3:Minimum overlap by metal2 < 1"
+EXT		via2 via    LT 2	"Rule 14.4:min space(via2,via)<2"
+;###############################################################################
+; metal3(Lambda base)
+;###############################################################################
+WIDTH		metal3      LT 3	"Rule 15.1:min width(metal3) < 3"
+EXT		metal3      LT 3	"Rule 15.2:min space(metal3) < 3"
+ENC		via2 metal3 LT 1	"Rule 15.3:Minimum overlap by metal3 < 1" 
+;###############################################################################
+; via3(Lambda base)
+;###############################################################################
+LENGTH		via3        NE 2	"Rule 21.1.1:exact via3 size != 2"	
+AREA		via3        NE 0.8	"Rule 21.1.3:exact via3 area(um2) != 0.8"
+EXT		via3        LT 3	"Rule 21.2:min via3 space < 3"
+ENC		via3 metal3 LT 1	"Rule 21.3:Minimum overlap by metal3 < 1"
+;###############################################################################
+; metal4(Lambda base)
+;###############################################################################
+WIDTH		metal4      LT 6	"Rule 22.1:min width(metal4) < 6"
+EXT		metal4      LT 6	"Rule 22.2:min space(metal4) < 6"
+ENC		via3 metal4 LT 2	"Rule 22.3:Minimum overlap by metal4 < 2"
+;###############################################################################
+; overglass(micron base)
+; top metal : metal2
+;###############################################################################
+SELECT	glass	ENCLOSE probe	bpad
+NOT	glass	        bpad	ppad
+SELECT	metal2	ENCLOSE	glass	padmetal
+WIDTH		bpad            LT 300	"Rule 10.1:width(pad) < 300(60um)"
+WIDTH		ppad            LT 100	"Rule 10.2:width(probe pad) < 100(20um)"
+ENC		glass padmetal  LT 30	"Rule 10.3:Minimum overlap by pad metal < 30(6um)"
+EXT[N]		padmetal metal2 LT 150	"Rule 10.4:min space(pad-metal,metal4) < 150(30um)"
+EXT		padmetal active LT 75	"Rule 10.5.1:min space(pad-metal,active) < 75(15um)"
+EXT		padmetal poly   LT 75	"Rule 10.5.2:min space(pad-metal,poly) < 75(15um)"
+EXT		padmetal poly2  LT 75	"Rule 10.5.3:min space(pad-metal,poly2) < 75(15um)"
+*END

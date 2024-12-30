@@ -1,0 +1,11 @@
+// This context file was created by MyCAD Design Manager
+// 
+LIBRARY counter .\counter.lib
+LIBRARY Analog C:\MyAnalogSV63\Library\MyAnalog\Analog.lib
+LIBRARY d_ff .\d_ff.lib
+LIBRARY xor .\xor.lib
+LIBRARY inverter .\inverter.lib
+LIBRARY nand .\nand.lib
+LIBRARY tran .\tran.lib
+LIBRARY buffer .\buffer.lib
+LIBRARY and .\and.lib

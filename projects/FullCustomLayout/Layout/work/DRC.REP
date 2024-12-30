@@ -1,0 +1,253 @@
+;###################################################################################
+;# MYCAD, INC. SHALL NOT BE LIABLE FOR THE ACCURACY OF                             #
+;# THIS DESIGN RULE FILE OR IT'S ABILITY TO CAPTURE ERRORS.                        #
+;# THE USER IS RESPONSIBLE FOR THOROUGHLY TESTING AND IMPLEMENTING                 #
+;# IT'S FEATURES.                                                                  #
+;###################################################################################
+;
+;###################################################################################
+;# MOSIS SCMOS 0.35UM DESIGN RULE FOR MYCHIP (REF. HTTP://WWW.MOSIS.COM)           #
+;# TSMC (0.35UM N-WELL) SCN4ME_SUBM (LAMBDA=0.2 UM)			           #
+;# BY MYCAD SUPPORT GROUP							   #
+;#										   #
+;# SUPPORT INFORMATION:                                                            #
+;#                                                                                 #
+;# THIS RULE FILE IS SUPPORTED BY MYCAD, INC. CUSTOMER SUPPORT.                    #
+;# FOR CONTACT INFORMATION CONSULT SUPPORT@SELOCO.COM                              #
+;#                                                                                 #
+;# REVISION HISTORY:                                                               #
+;#                                                                                 #
+;# 08/17/2004      BUILD                                                           #
+;#                                                                                 #
+;# 08/20/2004      FIRST RELEASE                                                   #
+;# 11/30/2009      SECOND RELEASE BY JHPARK                                        #
+;#                 MODIFIED ENC AND AREA FOR DESIGN RULE ERROR                     #
+;###################################################################################
+;
+;###################################################################################
+;# DESCRIPTION BLOCK								   #
+;###################################################################################
+;
+;TECHNOLOGY LAYERS: NWELL ACTIVE THK_ACTIVE PPLUS NPLUS POLY POLY2 CONTACT 
+;                   METAL1 VIA METAL2 VIA2 METAL3 VIA3 METAL4
+;                   GLASS
+;                   PROBE (NON-FAB LAYER USED TO HIGHLIGHT PADS)
+;
+*DESCRIPTION
+LAMBDA = 0.2
+CHECK-MODE = FLAT
+;
+;
+;##################################################################################
+;# LAYER BLOCK									  #
+;##################################################################################
+;
+*LAYER
+SUBSTRATE = PBULK
+CONNECT-LAYER = PSUB NWELL PSD NSD POLY POLY2 METAL1 METAL2 METAL3 METAL4
+;
+;
+;##################################################################################
+;# OPERATION BLOCK								  #
+;##################################################################################
+;
+*OPERATION
+NOT	PBULK	NWELL	PSUB
+AND	ACTIVE	PPLUS	PACTIVE
+AND	ACTIVE	NPLUS	NACTIVE
+OR	PPLUS	NPLUS	ALLSELECT
+AND	PACTIVE	POLY	PGATE
+AND	NACTIVE	POLY	NGATE
+NOT	PACTIVE PGATE	PSD
+NOT	NACTIVE NGATE	NSD
+AND	PSUB	PSD	PPLUG
+AND	NWELL	NSD	NPLUG
+AND	PPLUG	CONTACT	PPCONT
+AND	NPLUG	CONTACT	NPCONT
+; INTERLAYER CONNECTION
+CONNECT		METAL4	METAL3	BY	VIA3
+CONNECT		METAL3	METAL2	BY	VIA2
+CONNECT		METAL2	METAL1	BY	VIA
+CONNECT		METAL1	POLY	BY	CONTACT
+CONNECT		METAL1	POLY2	BY	CONTACT
+CONNECT		METAL1	PSD	BY	CONTACT
+CONNECT		METAL1	NSD	BY	CONTACT
+; SUBSTRATE & WELL CONNECTION
+SCONNECT	PSD	PSUB	BY	PPCONT
+SCONNECT	NSD	NWELL	BY	NPCONT
+;
+;###############################################################################
+; N-WELL(LAMBDA BASE)
+;###############################################################################
+WIDTH		NWELL LT 12		"RULE 1.1:WIDTH(N-WELL) < 12"
+EXT[N]		NWELL LT 18		"RULE 1.2:SPACE(N-WELL) DIFF VTG < 18"
+EXT[N']		NWELL LT 6		"RULE 1.3:SPACE(N-WELL) SAME VTG < 6"
+;###############################################################################
+; ACTIVE(LAMBDA BASE)
+;###############################################################################
+WIDTH		ACTIVE LT 3		"RULE 2.1:WIDTH(ACTIVE) < 3"
+EXT		ACTIVE LT 3		"RULE 2.2:SPACE(ACTIVE) < 3"
+ENC		PACTIVE NWELL LT 6 	"RULE 2.3.1:WELL EDGE WITH PACTIVE < 6"
+EXT		NACTIVE NWELL LT 6 	"RULE 2.3.2:WELL EDGE WITH NACTIVE < 6"
+ENC		NPLUG NWELL LT 3  	"RULE 2.4.1:WELL CONTACT SPACE WITH NPLUG < 3"
+EXT		PPLUG NWELL LT 3   	"RULE 2.4.2:WELL CONTACT SPACE WITH PPLUG < 3"
+AND	NACTIVE	PACTIVE	NPACT
+ERROR	NPACT				"RULE 2.5.1:NO OVERLAP VIOLATION"
+SELECT	PACTIVE OVERLAP	NACTIVE	OVERPACT
+SELECT	NACTIVE	OVERLAP PACTIVE	OVERNACT
+NOT	PACTIVE OVERPACT NOTOVERPACT
+NOT	NACTIVE	OVERNACT NOTOVERNACT
+EXT	NOTOVERNACT NOTOVERPACT LT 4	"RULE 2.5.2:SPACE(NACTIVE,PACTIVE) < 4"
+;###############################################################################
+; THICK ACTIVE (LAMBDA BASE)
+;###############################################################################
+WIDTH   THK_ACTIVE              LT 4    "RULE 24.1: WIDTH(THICK ACTIVE) < 4"
+EXT     THK_ACTIVE              LT 4    "RULE 24.2: SPACE(THICK ACTIVE) < 4"
+ENC     ACTIVE      THK_ACTIVE  LT 4	"RULE 24.3: ACTIVE OVERLAP < 4"
+SELECT  THK_ACTIVE ENCLOSE ACTIVE ENCTHK
+EXT     THK_ACTIVE  ACTIVE      LT 4    "RULE 24.4. SPACE(THICK ACTIVE, ACTIVE) < 4"
+AND     THK_ACTIVE         ACTIVE THKACT
+AND     THKACT             POLY   THKGATE
+WIDTH   THKGATE                 LT 3    "RULE 24.5. WIDTH(THICK ACTIVE GATE POLY) < 3"
+NOT     THK_ACTIVE         ENCTHK NONTHK
+ERROR   NONTHK                          "RULE 24.6. NOT ENCLOSE ACTIVE"
+;###############################################################################
+; POLY(LAMBDA BASE)
+;###############################################################################
+WIDTH		POLY LT 2		"RULE 3.1:WIDTH(POLY) < 2"
+EXT		POLY LT 3		"RULE 3.2:SPACE(POLY) < 3"
+SELECT		POLY   CUT ACTIVE  POLYACT
+AND 		ACTIVE	   POLYACT ACTPACT
+ENC[T] ACTPACT ACTIVE LT 0.001 &
+ENC[T] ACTPACT POLYACT LT 2 "RULE 3.3:MIN GATE POLY EXTENSION OVER ACTIVE < 2"
+SELECT          ACTIVE CUT POLY ACTPOLY
+AND POLY ACTPOLY POLYAPOLY
+ENC[T] POLYAPOLY POLY LT 0.001 &
+ENC[T] POLYAPOLY ACTPOLY LT 3 	"RULE 3.4:MIN ACTIVE EXTENSION OVER GATE POLY < 3"
+OR		POLY ACTIVE   POLACT
+EXT[H]	POLACT LT 1 		"RULE 3.5:MIN SPACE BETWEEN ACTIVE AND ROUTING POLY < 1"
+;###############################################################################
+; POLY2(LAMBDA BASE) FOR CAPACITOR
+;###############################################################################
+WIDTH		POLY2 LT 7		"RULE 11.1:WIDTH(POLY2) < 7"
+EXT		POLY2 LT 3		"RULE 11.2:SPACE(POLY2) < 3"
+
+ENC		POLY2   POLY      LT 5  "RULE 11.3:MINIMUM OVERLAP BY POLY < 5"
+EXT		POLY2   NWELL     LT 2  "RULE 11.4:SPACE(POLY2,NWELL) < 2"
+EXT		POLY2   ACTIVE    LT 2  "RULE 11.4:SPACE(POLY2,ACTIVE) < 2" 
+EXT		POLY2   CONTACT   LT 6  "RULE 11.5:SPACE(POLY2,CONTACT) < 6"
+SELECT	NOT	METAL1 CUT POLY2 NOTMET1P2
+EXT		POLY2   NOTMET1P2 LT 2  "RULE 11.6:MIN SPACING TO METAL < 2"
+;###############################################################################
+; SELECT(LAMBDA BASE)
+;###############################################################################
+ENC[O] ACTIVE POLY LT 0.001 &
+EXT		ALLSELECT POLY LT 3	"RULE 4.1:MIN SELECT SPACING TO CHANNEL < 3"
+ENC		ACTIVE PPLUS  LT 2	"RULE 4.2.1:MINIMUM OVERLAP BY PPLUS < 2"
+ENC		ACTIVE NPLUS  LT 2	"RULE 4.2.2:MINIMUM OVERLAP BY NPLUS < 2"
+ENC		CONTACT PPLUS LT 1	"RULE 4.3.1:MINIMUM OVERLAP BY PPLUS < 1"
+ENC		CONTACT NPLUS LT 1	"RULE 4.3.2:MINIMUM OVERLAP BY NPLUS < 1"
+WIDTH		PPLUS         LT 2	"RULE 4.4.1:MIN P+ SELECT WIDTH < 2"
+WIDTH		NPLUS         LT 2	"RULE 4.4.2:MIN N+ SELECT WIDTH < 2"
+EXT		PPLUS         LT 2	"RULE 4.4.3:MIN P+ SELECT SPACE < 2"
+EXT		NPLUS         LT 2	"RULE 4.4.4:MIN N+ SELECT SPACE < 2"
+AND	NPLUS PPLUS NPPLUS
+ERROR		NPPLUS			"RULE 4.4.5:NO OVERLAP VIOLATION"
+SELECT	NPLUS    OVERLAP PPLUS    OVERNPLUS
+SELECT	PPLUS    OVERLAP NPLUS    OVERPPLUS
+NOT	NPLUS    OVERNPLUS	  NOTOVERNPLUS
+NOT	PPLUS    OVERPPLUS        NOTOVERPPLUS
+EXT	NOTOVERNPLUS NOTOVERPPLUS LT 2 "RULE 4.4.6:MIN SPACE(BETWEEN N+ AND P+ SELECT) < 2"
+;###############################################################################
+; SIMPLE CONTACT TO POLY(LAMBDA BASE)
+;###############################################################################
+LENGTH		CONTACT NE 2		"RULE 5.1.1:EXACT CONTACT SIZE != 2"	
+AREA		CONTACT NE 0.8		"RULE 5.1.2:EXACT CONTACT AREA(UM2) != 0.8"	
+ENC		CONTACT POLY  LT 1.5 	"RULE 5.2:MINIMUM OVERLAP BY POLY < 1.5"
+EXT		CONTACT LT 3		"RULE 5.3:SPACE(CONTACT) < 3"
+EXT		CONTACT PGATE LT 2	"RULE 5.4.1:SPACE(CONTACT) < 2"
+EXT		CONTACT NGATE LT 2	"RULE 5.4.2:SPACE(CONTACT) < 2"
+;###############################################################################
+; SIMPLE CONTACT TO ACTIVE(LAMBDA BASE)
+;###############################################################################
+ENC		CONTACT ACTIVE LT 1.5 	"RULE 6.2:MINIMUM OVERLAP BY ACTIVE  < 1.5"
+;###############################################################################
+; CONTACT TO POLY2(LAMBDA BASE)
+;###############################################################################
+AND     CONTACT   POLY2     POLY2CONT
+AND     POLY      POLY2     POLYCAP
+AND     POLY2CONT POLYCAP   PCAPCONT
+NOT     POLY2CONT PCAPCONT  NPCAPCONT
+ENC             PCAPCONT  POLY2  LT 3   "RULE 13.3:MINIMUM OVERLAP BY POLY2 < 3"
+ENC             NPCAPCONT POLY2  LT 2   "RULE 13.4:MINIMUM OVERLAP BY POLY2 < 2"
+EXT             POLY2CONT POLY   LT 3   "RULE 13.5:SPACE(POLY2 CONTACT,POLY) < 3"
+EXT             POLY2CONT ACTIVE LT 3   "RULE 13.5:SPACE(POLY2 CONTACT,ACTIVE) < 3"
+;###############################################################################
+; METAL1(LAMBDA BASE)
+;###############################################################################
+WIDTH		METAL1         LT 3	"RULE 7.1:WIDTH(METAL1) < 3"
+EXT		METAL1         LT 3	"RULE 7.2:SPACE(METAL1) < 3"
+ENC		CONTACT METAL1 LT 1	"RULE 7.3:MINIMUM OVERLAP BY METAL1 < 1"
+;###############################################################################
+; VIA(LAMBDA BASE)
+;###############################################################################
+LENGTH		VIA         NE 2	"RULE 8.1.1:EXACT VIA SIZE != 2"	
+AREA		VIA         NE 0.8	"RULE 8.1.4:EXACT VIA AREA(UM2) != 0.8"
+
+EXT		VIA         LT 3	"RULE 8.2:MIN VIA SPACE < 3"
+ENC		VIA METAL1  LT 1	"RULE 8.3:MINIMUM OVERLAP BY METAL1 < 1"
+EXT		VIA CONTACT LT 2	"RULE 8.4:MIN SPACE(VIA,CONTACT) < 2"
+EXT		VIA POLY    LT 2	"RULE 8.5.1:MIN SPACE(VIA,POLY) < 2"
+EXT		VIA ACTIVE  LT 2	"RULE 8.5.2:MIN SPACE(VIA,ACTIVE) < 2"
+;###############################################################################
+; METAL2(LAMBDA BASE)
+;###############################################################################
+WIDTH		METAL2     LT 3		"RULE 9.1:MIN WIDTH(METAL2) < 3"
+EXT		METAL2     LT 3		"RULE 9.2:MIN SPACE(METAL2) < 3"
+ENC		VIA METAL2 LT 1		"RULE 9.3:MINIMUM OVERLAP BY METAL2 < 1"
+;###############################################################################
+; VIA2(LAMBDA BASE)
+;###############################################################################
+LENGTH		VIA2        NE 2	"RULE 14.1.1:EXACT VIA2 SIZE != 2"	
+AREA		VIA2        NE 0.8	"RULE 14.1.3:EXACT VIA2 AREA(UM2) != 0.8"
+EXT		VIA2        LT 3	"RULE 14.2:MIN VIA2 SPACE < 3"
+ENC		VIA2 METAL2 LT 1	"RULE 14.3:MINIMUM OVERLAP BY METAL2 < 1"
+EXT		VIA2 VIA    LT 2	"RULE 14.4:MIN SPACE(VIA2,VIA)<2"
+;###############################################################################
+; METAL3(LAMBDA BASE)
+;###############################################################################
+WIDTH		METAL3      LT 3	"RULE 15.1:MIN WIDTH(METAL3) < 3"
+EXT		METAL3      LT 3	"RULE 15.2:MIN SPACE(METAL3) < 3"
+ENC		VIA2 METAL3 LT 1	"RULE 15.3:MINIMUM OVERLAP BY METAL3 < 1" 
+;###############################################################################
+; VIA3(LAMBDA BASE)
+;###############################################################################
+LENGTH		VIA3        NE 2	"RULE 21.1.1:EXACT VIA3 SIZE != 2"	
+AREA		VIA3        NE 0.8	"RULE 21.1.3:EXACT VIA3 AREA(UM2) != 0.8"
+EXT		VIA3        LT 3	"RULE 21.2:MIN VIA3 SPACE < 3"
+ENC		VIA3 METAL3 LT 1	"RULE 21.3:MINIMUM OVERLAP BY METAL3 < 1"
+;###############################################################################
+; METAL4(LAMBDA BASE)
+;###############################################################################
+WIDTH		METAL4      LT 6	"RULE 22.1:MIN WIDTH(METAL4) < 6"
+EXT		METAL4      LT 6	"RULE 22.2:MIN SPACE(METAL4) < 6"
+ENC		VIA3 METAL4 LT 2	"RULE 22.3:MINIMUM OVERLAP BY METAL4 < 2"
+;###############################################################################
+; OVERGLASS(MICRON BASE)
+; TOP METAL : METAL2
+;###############################################################################
+SELECT	GLASS	ENCLOSE PROBE	BPAD
+NOT	GLASS	        BPAD	PPAD
+SELECT	METAL2	ENCLOSE	GLASS	PADMETAL
+WIDTH		BPAD            LT 300	"RULE 10.1:WIDTH(PAD) < 300(60UM)"
+WIDTH		PPAD            LT 100	"RULE 10.2:WIDTH(PROBE PAD) < 100(20UM)"
+ENC		GLASS PADMETAL  LT 30	"RULE 10.3:MINIMUM OVERLAP BY PAD METAL < 30(6UM)"
+EXT[N]		PADMETAL METAL2 LT 150	"RULE 10.4:MIN SPACE(PAD-METAL,METAL4) < 150(30UM)"
+EXT		PADMETAL ACTIVE LT 75	"RULE 10.5.1:MIN SPACE(PAD-METAL,ACTIVE) < 75(15UM)"
+EXT		PADMETAL POLY   LT 75	"RULE 10.5.2:MIN SPACE(PAD-METAL,POLY) < 75(15UM)"
+EXT		PADMETAL POLY2  LT 75	"RULE 10.5.3:MIN SPACE(PAD-METAL,POLY2) < 75(15UM)"
+*END
+-- TOTAL RULES    : 141
+-- PASSED RULES   : 141
+-- ERROR RULES    : 0
+-- WARNING RULES  : 0

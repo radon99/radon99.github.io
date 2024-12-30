@@ -1,0 +1,12 @@
+[CHIP]
+TECH_FILE	C:\MyCADPro\MyCAD example\Layout\Technology file\SCMOS_SCN4ME_SUBM.TEC
+[COMMON]
+CELL	sanghun	sanghun._00
+CELL	tspc	tspc._00
+CELL	inverter	inverter._00
+CELL	nand	nand._00
+CELL	mux	mux._00
+CELL	counter	counter._00
+CELL	comp	comp._00
+CELL	buf	buf._00
+CELL	buf4	buf4._00

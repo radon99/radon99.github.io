@@ -1,0 +1,4 @@
+[LOGIC]
+[COMMON]
+CELL inv inv
+CELL sim_inv sim_inv

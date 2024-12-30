@@ -1,0 +1,4 @@
+[LOGIC]
+[COMMON]
+CELL counter counter
+CELL sim_counter sim_counter

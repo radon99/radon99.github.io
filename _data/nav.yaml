@@ -13,11 +13,25 @@
       - title: Python #Submenu item title.
         url: category/python.html #Submenu item url.
         hue: "var(--c-themeHueOrange)" #Submenu item hue.
+      - title: MATLAB #Submenu item title.
+        url: category/matlab.html #Submenu item url.
+        hue: "var(--c-themeHueOrange)" #Submenu item hue.
 #- title: Design
 #  url: category/design.html
 #  icon: assets/img/icons/paint_brush.svg
 #  hue: "var(--c-themeHueOrange)"
-- title: About
+- title: Hardware #Menu item title.
+  url: category/hardware.html #Menu item url.
+  icon: assets/img/icons/hardware.png #Menu item icon.
+  hue: "var(--c-themeHueRed)" #Menu item hue - see note [1].
+  subnav: #Subnav. See note [2].
+      - title: LTspice #Submenu item title.
+        url: category/ltspice.html #Submenu item url.
+        hue: "var(--c-themeHueOrange)" #Submenu item hue.
+      - title: MyCAD #Submenu item title.
+        url: category/mycad.html #Submenu item url.
+        hue: "var(--c-themeHueOrange)" #Submenu item hue.
+- title: About Me
   url: about/index.html
-  icon: assets/img/icons/info.svg
+  icon: assets/img/icons/resume.png
   hue: "var(--c-themeHueGreen)"

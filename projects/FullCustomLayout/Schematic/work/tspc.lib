@@ -1,0 +1,4 @@
+[LOGIC]
+[COMMON]
+CELL tspc tspc
+CELL sim_tspc sim_tspc

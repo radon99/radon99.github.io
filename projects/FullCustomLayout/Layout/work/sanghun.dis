@@ -1,0 +1,125 @@
+**************************************************************** 
+**            MyChip Station MyLVS Pro 2017
+**            Copyright(c) 1992-2017 MyCAD, Inc. 
+**            EXECUTION TIME = 15:48:36  DATE = 5/31/2023 
+**************************************************************** 
+ 
+MYLVS PATH : C:\MyCADPro\MyCAD example\Layout\work\sanghun._00\
+CELL1 NAME : sanghun
+CELL2 NAME :
+LAYOUT EXTRACTION : extract.1
+SCHEMATIC NETLIST : divider.cir
+ 
+[L] CMOS REDUCE OPTION (NOR and NAND) -- OFF
+[C] CMOS REDUCE OPTION (NOR, NAND, AOI and OAI) -- ON
+[F] ALL UNUSED DEVICES WILL BE FILTERED FROM CHECKING -- OFF
+[K] ALL PARALLEL DEVICES WILL REMAIN "UNSMASHED" -- OFF
+[S] ALL THE PARALLEL MOS-SERIES WITH THE SAME I/O WILL BE SMASHED -- ON
+[X] NO SWAPPING OF INPUTS WILL BE ALLOWED -- OFF
+[U] ONLY THE UNMATCHED DEVICES ON MATCHED NODE WILL BE REPORTED -- OFF
+[R] ALL SERIES AND PARALLEL RESISTOR DEVICES WILL BE SMASHED -- OFF
+[A] ALL SERIES CAPACITORS WILL BE SMASHED -- OFF
+[P] THE CAPACITOR POLARITY WILL BE CHECKED -- OFF
+[B] BULK NODE WILL BE COMPARED -- OFF
+ 
+A TOLERANCE OF PERCENT FOR TR. WIDTH       = 1%
+A TOLERANCE OF PERCENT FOR TR. LENGTH      = 1%
+A TOLERANCE OF PERCENT FOR CAPACITOR AREA  = 1%
+A TOLERANCE OF PERCENT FOR CAPACITOR VALUE = 1%
+A TOLERANCE OF PERCENT FOR DIODE AREA      = 100%
+A TOLERANCE OF PERCENT FOR DIODE PERIMETER = 100%
+A TOLERANCE OF PERCENT FOR RESISTOR VALUE  = 100%
+ 
+USE NET AND DEVICE SHAPE FILE -- NO
+ 
+CHECK MODE : FLAT
+ 
+ 
+------------------------------ 1 ------------------------------
+               CELL NAME : TOP
+
+************* CORRESPONDING NODE PAIRS *************
+
+      SCHEMATIC         LAYOUT      TEXT TYPE   
+
+             C0             C0              O
+             C1             C1              O
+             C2             C2              O
+            CLK            CLK              O
+          D_CLK          D_CLK              O
+            GND            GND              G
+          O_CLK          O_CLK              O
+            VDD            VDD              P
+NUMBER OF LAY. PADS READ =        8  DISCARDED =        0
+NUMBER OF SCH. PADS READ =        8  DISCARDED =        0
+
+NUMBER OF VALID CORRESPONDENCE NODE PAIRS =        6
+ 
+*******   MYLVS DEV SUMMARY REPORT  *******
+
+*******************************************
+****  REDUCE (LAYOUT) SUMMARY REPORT   ****
+*******************************************
+---------- TOTAL LAYOUT DEVICES -----------
+MOS      : 100
+---------- REDUCED LAYOUT DEVICES ---------
+MOS      : 20
+INV      : 20
+SUP      : 4
+SDW      : 8
+NAND     : 4
+
+*******************************************
+***  REDUCE (SCHEMATIC) SUMMARY REPORT  ***
+*******************************************
+--------- TOTAL SCHEMATIC DEVICES ---------
+MOS      : 100
+--------- REDUCED SCHEMATIC DEVICES -------
+MOS      : 20
+INV      : 20
+SUP      : 4
+SDW      : 8
+NAND     : 4
+
+ 
+
+******************* UN-MATCH LAYOUT DEVICES *******************
+*******************    ( LIST UP TO 100 )   *******************
+***************************************************************
+ 
+***************** UN-MATCH SCHEMATIC DEVICES ******************
+*******************    ( LIST UP TO 100 )   *******************
+***************************************************************
+ 
+***************************************************************
+****************  DISCREPANCY POINTS  SUMMARY  ****************
+***************************************************************
+
+
+***************************************************************
+
+******** LVS DEVICES MATCHED SUMMARY ********
+NUMBER OF UN-MATCHED SCHEMATIC DEVICES =    0
+NUMBER OF    MATCHED SCHEMATIC DEVICES =   56
+NUMBER OF UN-MATCHED LAYOUT    DEVICES =    0
+NUMBER OF    MATCHED LAYOUT    DEVICES =   56
+
+********** LVS DISCREPANCY SUMMARY **********
+NUMBER OF    DISCREPANCIES             =    0
+
+*********************************************
+NUMBER OF UN-MATCHED SCHEMATIC DEVICES =    0
+NUMBER OF UN-MATCHED LAYOUT    DEVICES =    0
+NUMBER OF    DISCREPANCIES             =    0
+NUMBER OF UN-MATCHED AND DISCREPANCIES =    0
+*********************************************
+
+----------------------------------------------------------------
+
+
+*************** EXECUTION TIME **************
+START EXECUTION TIME : 15:48:36
+END   EXECUTION TIME : 15:48:36
+*********************************************
+ 
+>>>>> LVS-CHECK COMPLETED <<<<<

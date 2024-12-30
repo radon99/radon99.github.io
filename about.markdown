@@ -24,27 +24,32 @@ permalink: /about/
 ---
 
 ## Key Projects  
-1. **ATMEGA128A 기반 디지털 선풍기**  
-   - PWM 제어와 LCD 디스플레이를 활용한 다기능 선풍기 설계.  
-   - 바람 세기에 따라 음악 속도를 조절하는 독창적인 기능 구현.  
+**[ 엣지 AI/SW 아카데미 프로젝트 ]**   
+• SoftSerial 통신 및 ATmega128 GPIO 제어를 통한 다기능 디지털 선풍기 개발  
+• OpenCV와 Mediapipe를 활용한 얼굴 및 손 트래킹 줌 솔루션 개발  
+• Yolo와 PaddleOCR 파인튜닝 모델을 활용한 AI 도서 자동 관리 시스템 개발  
+• RasPi, Arduino, STM32로 구현한 소켓 통신 기반 IoT 건물 관리 시스템 개발  
+• RasPi 보드 내의 부트로더, 시스템 콜함수, 커널포팅을 통한 GPIO 제어  
 
-2. **스마트 트래킹 줌 솔루션**  
-   - MediaPipe와 OpenCV를 사용해 얼굴 및 손을 추적.  
-   - 사용자 경험을 최적화하기 위해 부드러운 화면 이동과 줌 기능 개발.  
-
-3. **스마트 도서 관리 시스템**  
-   - 텍스트 OCR과 객체 인식을 활용한 자동 도서 관리.  
-   - RasPi 서버와 STM/Arduino 보드 간 소켓 통신을 통해 시스템 구현.  
-
-4. **소켓 통신 기반 건물 관리 시스템**  
-   - 클라이언트-서버 구조를 통해 층별 장치 상태 제어 및 데이터 동기화 구현.  
+**[ 학부 프로젝트 ]**   
+• EV3를 활용한 색깔 센서 기반 주행 라인트레이서 개발  
+• LSTM 기반 딥러닝 모델을 통한 이차전지 SoH 예측 모델 개발  
+• MATLAB 기반 CMSIS FIR을 활용한 신호 처리 및 DMA 스테레오 채널 분리 시스템 구현  
+• LTspice를 활용한 LDO 설계와 성능 검증 및 보상  
+• C 언어를 활용한 메모리 W/R 타이밍 계산 알고리즘 구현  
+• Verilog를 사용하여 Mealy FSM 기반 커피 자판기 설계 및 테스트벤치  
+• MyCAD를 활용한 Full Custom Layout 설계 및 DRC, ERC, LVS 검증  
 
 ---
 
 ## Skills  
-- **Programming**: C/C++, Python  
-- **Hardware**: STM32, Arduino, Raspberry Pi  
-- **OS**: Windows, Linux  
+• Linux  
+• C / C++ / Python / Verilog  
+• MATLAB / LTspice / Xilinx Vivado  
+• Git   
+• BSP / TCP/IP / MariaDB / Qt   
+• OpenCV  
+• AVR / STM32 / RasPi / FPGA  
 
 ---
 

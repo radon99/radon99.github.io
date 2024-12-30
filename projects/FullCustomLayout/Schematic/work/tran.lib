@@ -1,0 +1,4 @@
+[LOGIC]
+[COMMON]
+CELL tran tran
+CELL sim_tran sim_tran
