@@ -39,13 +39,15 @@ layout: default
                 {% endif %}
             >
                 {% if page.prevPart != nil %}
-                    <a href="{% link {{ page.prevPart }} %}">
+                	{% assign post_path = page.prevPart %}
+                    <a href="{% link {{ post_path }} %}">
                         <img  class="arrow-left" src="{{ site.url }}/assets/img/icons/arrow_left.svg"/>
                         Previous
                     </a>
                 {% endif %}
                 {% if page.nextPart != nil %}
-                    <a href="{% link {{ page.nextPart }} %}">
+                	{% assign post_path = page.nextPart %}
+                    <a href="{% link {{ post_path }} %}">
                         Next
                         <img class="arrow-right" src="{{ site.url }}/assets/img/icons/arrow_right.svg"/>
                     </a>
