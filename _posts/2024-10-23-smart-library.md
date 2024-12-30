@@ -4,8 +4,8 @@ category: [programming, python]
 title: "Smart Library 프로젝트"
 date: 2024-10-23
 author: jsh
-nextPart: _posts/2024-11-26-building-management.md
-prevPart: _posts/2024-09-05-focus-me.md
+#nextPart: _posts/2024-11-26-building-management.md
+#prevPart: _posts/2024-09-05-focus-me.md
 ---
 
 # 스마트 도서 관리 시스템

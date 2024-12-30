@@ -4,8 +4,8 @@ category: [programming, cpp]
 title:  "Digital Fan 프로젝트"
 date: 2024-08-09
 author: jsh #Author's nick.
-prevPart: _posts/2024-08-09-digital-fan.md #Previous part.
-nextPart: _posts/2024-09-05-focus-me.md
+#nextPart: _posts/2024-09-05-focus-me.md
+#prevPart: _posts/2024-08-09-digital-fan.md
 ---
 
 # **Digital Fan 프로젝트**
