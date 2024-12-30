@@ -202,5 +202,5 @@ QT를 이용하여 간단한 테스트용 GUI 구성 및 단일 카메라로 테
 ---
 
 ## **GitHub 저장소**
-[프로젝트 코드 보기](https://github.com/radon99/radon99.github.io/smartlibrary)
+[프로젝트 코드 보기](https://github.com/radon99/radon99.github.io/tree/main/projects/SmartLibrary)
 
