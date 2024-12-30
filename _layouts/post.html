@@ -38,13 +38,13 @@ layout: default
                 {% endif %}
             >
                 {% if page.prevPart != nil %}
-                    <a href="{{ page.prevPart | relative_url }}">
+                    <a href="{% link {{ page.prevPart | relative_url }} %}">
                         <img  class="arrow-left" src="{{ site.url }}/assets/img/icons/arrow_left.svg"/>
                         Previous
                     </a>
                 {% endif %}
                 {% if page.nextPart != nil %}
-                    <a href="{{ page.nextPart | relative_url }}">
+                    <a href="{% link {{ page.nextPart | relative_url }} %}">
                         Next
                         <img class="arrow-right" src="{{ site.url }}/assets/img/icons/arrow_right.svg"/>
                     </a>
