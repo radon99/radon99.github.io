@@ -3,7 +3,7 @@ email: radon99@naver.com
 description: >- # this means to ignore newlines until "baseurl:"
   안녕하세요. 정상훈의 개발 프로젝트와 기술 작업물을 담은 포트폴리오 사이트입니다. 임베디드, AI, 하드웨어 등 다양한 프로젝트를 확인해보세요.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://radon99.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Build settings
 #theme: jekyll-theme-simplex
