@@ -9,4 +9,3 @@ gem 'csv'
 gem 'bigdecimal'
 gem 'base64'
 gem 'webrick', '~> 1.7'
-gemspec
