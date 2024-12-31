@@ -166,6 +166,32 @@
             }
         }
     }
+    
+	.snippet__container {
+	    display: flex;
+	    justify-content: space-between;
+	    align-items: center;
+	}
+
+	.snippet__text-group {
+	    display: flex;
+	    flex-direction: column;
+	    align-items: flex-start;
+	}
+
+	.snippet__thumbnail {
+	    flex-shrink: 0;
+	    margin-left: 16px;
+	    max-width: 200px;
+	}
+
+	.snippet__thumbnail img {
+	    width: 200px; 
+	    height: 150px; 
+	    object-fit: cover; 
+	    border-radius: 8px; 
+	    overflow: hidden;
+	}
 
     @include for-size('tablet'){
         padding: 0;

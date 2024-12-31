@@ -4,6 +4,7 @@ category: [programming, python]
 title: "Smart Library 프로젝트"
 date: 2024-10-23
 author: jsh
+excerpt: "Yolo와 PaddleOCR 파인튜닝 모델을 활용한 AI 도서 자동 관리 시스템 개발"
 #nextPart: _posts/2024-11-26-building-management.md
 #prevPart: _posts/2024-09-05-focus-me.md
 ---
@@ -202,5 +203,10 @@ QT를 이용하여 간단한 테스트용 GUI 구성 및 단일 카메라로 테
 ---
 
 ## **GitHub 저장소**
-[프로젝트 코드 보기](https://github.com/radon99/radon99.github.io/tree/main/projects/SmartLibrary)
+
+<div class='sx-button'>
+  <a href='https://github.com/radon99/radon99.github.io/tree/main/projects/SmartLibrary' target="_blank">
+    <img src='/assets/img/icons/github.png' style="width: auto; max-height: 50px;" />
+  </a>
+</div>
 

@@ -4,8 +4,7 @@ category: [programming, cpp]
 title: "IoT BMS 프로젝트"
 date: 2024-11-26
 author: jsh
-nextPart: _posts/2024-11-26-building-management.md
-prevPart: _posts/2024-10-23-smart-library.md
+excerpt: "RasPi, Arduino, STM32로 구현한 소켓 통신 기반 IoT 건물 관리 시스템 개발"
 ---
 
 # IoT BMS 프로젝트
@@ -178,5 +177,9 @@ STM32, Arduino 그리고 라즈베리파이를 활용한 IoT 기반 빌딩 관�
 ---
 
 ## GitHub 저장소
-[프로젝트 코드 보기](https://github.com/radon99/radon99.github.io/tree/main/projects/BuildingManagement)
 
+<div class='sx-button'>
+  <a href='https://github.com/radon99/radon99.github.io/tree/main/projects/BuildingManagement' target="_blank">
+    <img src='/assets/img/icons/github.png' style="width: auto; max-height: 50px;" />
+  </a>
+</div>

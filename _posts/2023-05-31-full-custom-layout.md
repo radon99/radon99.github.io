@@ -4,17 +4,22 @@ category: [hardware, mycad]
 title: "풀 커스텀 레이아웃 IC 설계 프로젝트"
 date: 2023-05-31
 author: jsh
-#nextPart: _posts/2024-11-26-building-management.md
-#prevPart: _posts/2024-10-23-smart-library.md
+excerpt: "MyCAD를 활용한 Full Custom Layout 설계 및 DRC, ERC, LVS 검증"
 ---
 
 # 풀 커스텀 레이아웃 IC 설계
+
+<div style="text-align: center;">
+<a href="/assets/img/posts/layout_main.png" data-lity>
+  <img src="/assets/img/posts/layout_main.png" style="width: auto; max-height: 500px;" />
+</a>
+</div>
 
 이 프로젝트는 MyCAD를 활용한 풀 커스텀 IC 설계 과정을 통해 디지털 집적 회로 설계 및 시뮬레이션을 수행한 내용을 담고 있습니다. 설계 목표는 입력 클럭의 1/8 분주와 입력 신호에 따라 지연된 분주 클럭을 출력하는 회로를 개발하는 것입니다.
 
 ---
 
-#과제 내용
+## 과제 내용
 
 입력 클럭 신호의 주파수를 1/8 로 나누어 출력하는 주파수 분주기를 설계한다. 출력 신호는 output clock 과 delayed clock 으로서 두 종류이다. 둘 다 동일한 주파수를 갖고 있지만, delayed clock 은 output clock 보다 n/8x2π 만큼 지연된 신호이다. 입력 클럭 신호는 VDD 와 GND 사이 의 펄스(VPULSE)로 인가한다. 입력 클럭 신호의 rise/fall time 은 각각 period 의 10% 로 설정한
 다. 예를 들어, 입력 클럭 신호의 주파수가 100MHz 라면, 주기는 10ns 이고 rise/fall time 은 각 각 1ns 이다. 출력 단에는 아래 그림과 같이 500fF 를 연결한다.
@@ -119,8 +124,8 @@ author: jsh
 ### 4. **최종 레이아웃**
 
 <div style="text-align: center;">
-<a href="/assets/img/posts/mycad7.jpg" data-lity>
-  <img src="/assets/img/posts/mycad7.jpg" style="width: auto; max-height: 500px;" />
+<a href="/assets/img/posts/mycad7.bmp" data-lity>
+  <img src="/assets/img/posts/mycad7.bmp" style="width: auto; max-height: 500px;" />
 </a>
 </div>
 
@@ -149,5 +154,9 @@ author: jsh
 ---
 
 ## GitHub 저장소
-[프로젝트 코드 보기](https://github.com/radon99/radon99.github.io/tree/main/projects/FullCustomLayout)
 
+<div class='sx-button'>
+  <a href='https://github.com/radon99/radon99.github.io/tree/main/projects/FullCustomLayout' target="_blank">
+    <img src='/assets/img/icons/github.png' style="width: auto; max-height: 50px;" />
+  </a>
+</div>

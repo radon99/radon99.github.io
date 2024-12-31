@@ -3,7 +3,8 @@ layout: post
 category: [programming, cpp]
 title:  "Digital Fan 프로젝트"
 date: 2024-08-09
-author: jsh #Author's nick.
+author: jsh 
+excerpt: "SoftSerial 통신 및 ATmega128 GPIO 제어를 통한 다기능 디지털 선풍기 개발"
 #nextPart: _posts/2024-09-05-focus-me.md
 #prevPart: _posts/2024-08-09-digital-fan.md
 ---
@@ -210,7 +211,10 @@ DigitalFan
 ---
 
 ## GitHub 저장소
-[프로젝트 코드 보기](https://github.com/radon99/radon99.github.io/tree/main/projects/DigitalFan)
 
-
+<div class='sx-button'>
+  <a href='https://github.com/radon99/radon99.github.io/tree/main/projects/DigitalFan' target="_blank">
+    <img src='/assets/img/icons/github.png' style="width: auto; max-height: 50px;" />
+  </a>
+</div>
 

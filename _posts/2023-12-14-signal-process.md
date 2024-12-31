@@ -2,15 +2,27 @@
 layout: post
 category: [programming, matlab]
 title: "임베디드 신호 처리 시스템 프로젝트"
-date: 2018-10-31
+date: 2023-12-14
 author: jsh
-#nextPart: _posts/2024-11-26-building-management.md
-#prevPart: _posts/2024-10-23-smart-library.md
+excerpt: "MATLAB 기반 CMSIS FIR을 활용한 신호 처리 및 분리 시스템 구현"
 ---
 
 # 임베디드 신호 처리 시스템 프로젝트
 
+<div style="text-align: center;">
+<a href="/assets/img/posts/signal_main.png" data-lity>
+  <img src="/assets/img/posts/signal_main.png" style="width: auto; max-height: 500px;" />
+</a>
+</div>
+
 STM32 기반 ARM 프로세서를 사용하여 MATLAB을 활용한 신호 처리와 CMSIS FIR 필터를 적용해 음악 신호를 분리하는 프로젝트입니다.
+
+<div style="text-align: center;">
+<a href="/assets/img/posts/signal2.png" data-lity>
+  <img src="/assets/img/posts/signal2.png" style="width: auto; max-height: 500px;" />
+</a>
+</div>
+
 - 블랙핑크의 DDU-DU DDU-DU
 - 방탄소년단의 FIRE
 
@@ -34,6 +46,13 @@ STM32 기반 ARM 프로세서를 사용하여 MATLAB을 활용한 신호 처리�
    - HPF로 분리된 신호는 변조(Modulation)를 통해 저역대로 이동.
 
 3. **CMSIS FIR 필터 적용**:
+
+<div style="text-align: center;">
+<a href="/assets/img/posts/signal1.png" data-lity>
+  <img src="/assets/img/posts/signal1.png" style="width: auto; max-height: 500px;" />
+</a>
+</div>
+
    - ARM Cortex-M4 기반의 CMSIS DSP 라이브러리를 활용하여 FIR 필터를 구현.
    - 왼쪽 채널에 LPF, 오른쪽 채널에 HPF 적용.
 
@@ -101,8 +120,11 @@ FIRE : Output2 출력을 shift한 출력 spectrogram
 
 ## GitHub 저장소
 
-[프로젝트 코드 보기](https://github.com/radon99/radon99.github.io/tree/main/projects/SignalProcessing)
-
+<div class='sx-button'>
+  <a href='https://github.com/radon99/radon99.github.io/tree/main/projects/SignalProcessing' target="_blank">
+    <img src='/assets/img/icons/github.png' style="width: auto; max-height: 50px;" />
+  </a>
+</div>
 
 
 

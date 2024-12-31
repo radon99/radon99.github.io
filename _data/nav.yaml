@@ -25,6 +25,9 @@
   icon: assets/img/icons/hardware.png #Menu item icon.
   hue: "var(--c-themeHueRed)" #Menu item hue - see note [1].
   subnav: #Subnav. See note [2].
+      - title: Verilog #Submenu item title.
+        url: category/verilog.html #Submenu item url.
+        hue: "var(--c-themeHueOrange)" #Submenu item hue.
       - title: LTspice #Submenu item title.
         url: category/ltspice.html #Submenu item url.
         hue: "var(--c-themeHueOrange)" #Submenu item hue.

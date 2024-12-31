@@ -1,9 +1,10 @@
-title: Sanghun Developer Portfolio
+title: ✨ Sanghun Developer Portfolio 💻
 email: radon99@naver.com
 description:   |  
-  안녕하세요.  
-  정상훈의 개발 프로젝트와 기술 작업물을 담은 포트폴리오 사이트입니다.   
-  임베디드, AI, 하드웨어 등 다양한 프로젝트를 확인해보세요.  
+  안녕하세요! 😊 <br>
+  정상훈의 개발 프로젝트와 기술 작업물을 담은 포트폴리오 사이트입니다. <br>
+  임베디드, AI, 하드웨어 등 다양한 프로젝트를 확인해보세요! <br>
+  🚀💻⚙️
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://radon99.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 

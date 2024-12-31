@@ -14,25 +14,48 @@
     }
     </style>
 <a class="snippet__link" href="{{ post.url }}">
-    <section class="snippet__data">
-        <section class="snippet__data__metadata">
-            <section class="snippet__data__metadata__category">
-                {% for category in post.category %}
-                    <p class="snippet__data__metadata__category__title" style="background: {{ site.category | where: "category", category | map: "hue"}}">{{ site.category | where: "category", category | map: "title"}}</p>
-                {% else %}
-                    <p class="snippet__data__metadata__category__title">No category</p>
-                {% endfor %}
+    <section class="snippet__container">
+        <div class="snippet__text-group">
+            <section class="snippet__data__metadata">
+                <section class="snippet__data__metadata__category">
+                    {% for category in post.category %}
+                        <p class="snippet__data__metadata__category__title" style="background: {{ site.category | where: "category", category | map: "hue"}}">
+                            {{ site.category | where: "category", category | map: "title" }}
+                        </p>
+                    {% else %}
+                        <p class="snippet__data__metadata__category__title">No category</p>
+                    {% endfor %}
+                </section>
+                <p class="snippet__data__metadata__date">{{ post.date | date: '%B %d, %Y' }}</p>
             </section>
-            <p class="snippet__data__metadata__date">{{ post.date | date: '%B %d, %Y' }}</p>
-        </section>
-        <h2 class="snippet__data__header">{{post.title }}</h2>
-        <p class="snippet__data__text">{{ post.excerpt | strip_html }}</p>
-        {% if post.author != nil %}
-            <div class="snippet__data__author"> 
-                {% assign author = site.authors | where: "nick", post.author | first %}
-                <img src="{{ site.url }}/{{ author.photo_dir }}"/>
-                <p>{{ author.full_name }}</p>
-            </div>
+            <h2 class="snippet__data__header">{{ post.title }}</h2>
+            <p class="snippet__data__text">{{ post.excerpt | strip_html }}</p>
+
+            {% if post.author != nil %}
+                <div class="snippet__data__author">
+                    {% assign author = site.authors | where: "nick", post.author | first %}
+                    <img src="{{ site.url }}/{{ author.photo_dir }}" />
+                    <p>{{ author.full_name }}</p>
+                </div>
+            {% endif %}
+        </div>
+
+	{% assign first_image = nil %}
+	{% capture content_with_img %}{{ post.content | strip_newlines }}{% endcapture %}
+	{% assign image_tags = content_with_img | split: '<img ' %}
+	{% if image_tags.size > 1 %}
+	    {% assign first_image_tag = image_tags[1] %}
+	    {% assign first_image_src = first_image_tag | split: 'src="' | last | split: '"' | first %}
+	    {% assign first_image = first_image_src %}
+	{% endif %}
+
+        
+        {% if first_image %}
+        <div class="snippet__thumbnail">
+            <img src="{{ first_image }}" alt=" ">
+        </div>
         {% endif %}
     </section>
-</a> 
+</a>
+
+
