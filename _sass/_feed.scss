@@ -183,6 +183,9 @@
 	    flex-shrink: 0;
 	    margin-left: 16px;
 	    max-width: 200px;
+	    @include for-size('tablet'){
+	    	display: none;
+	    }
 	}
 
 	.snippet__thumbnail img {

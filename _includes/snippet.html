@@ -13,6 +13,16 @@
         );
     }
     </style>
+    
+{% assign first_image = nil %}
+{% capture content_with_img %}{{ post.content | strip_newlines }}{% endcapture %}
+{% assign image_tags = content_with_img | split: '<img ' %}
+{% if image_tags.size > 1 %}
+    {% assign first_image_tag = image_tags[1] %}
+    {% assign first_image_src = first_image_tag | split: 'src="' | last | split: '"' | first %}
+    {% assign first_image = first_image_src %}
+{% endif %}	
+	
 <a class="snippet__link" href="{{ post.url }}">
     <section class="snippet__container">
         <div class="snippet__text-group">
@@ -40,16 +50,6 @@
             {% endif %}
         </div>
 
-	{% assign first_image = nil %}
-	{% capture content_with_img %}{{ post.content | strip_newlines }}{% endcapture %}
-	{% assign image_tags = content_with_img | split: '<img ' %}
-	{% if image_tags.size > 1 %}
-	    {% assign first_image_tag = image_tags[1] %}
-	    {% assign first_image_src = first_image_tag | split: 'src="' | last | split: '"' | first %}
-	    {% assign first_image = first_image_src %}
-	{% endif %}
-
-        
         {% if first_image %}
         <div class="snippet__thumbnail">
             <img src="{{ first_image }}" alt=" ">

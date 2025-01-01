@@ -196,10 +196,11 @@ DigitalFan
 
 ---
 
-## 결과 사진
+## 동작 영상
+
 <div style="text-align: center;">
-<a href="/assets/img/posts/DigitalFan_result.jpg" data-lity>
-  <img src="/assets/img/posts/DigitalFan_result.jpg" style="width: auto; max-height: 500px;"/>
+<a href="/assets/img/posts/fan_result.gif" data-lity>
+  <img src="/assets/img/posts/fan_result.gif" style="width: auto; max-height: 500px;"/>
 </a>
 </div>
 

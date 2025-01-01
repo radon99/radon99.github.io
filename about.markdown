@@ -62,7 +62,15 @@ permalink: /about/
 
 ## Contact  
 - Email: **radon99@naver.com**  
-- GitHub: [전체 프로젝트 보기](https://github.com/radon99/radon99.github.io)  
 
---- 
+---
+
+## GitHub:
+
+<div class='sx-button'>
+  <a href='https://github.com/radon99/radon99.github.io' target="_blank">
+    <img src='/assets/img/icons/github.png' style="width: auto; max-height: 50px;" />
+  </a>
+</div>
+
 
